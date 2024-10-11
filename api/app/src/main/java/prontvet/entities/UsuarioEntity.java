@@ -15,8 +15,7 @@ public class UsuarioEntity extends Entity {
     @JsonProperty("senha")
     private String senha;
 
-    public UsuarioEntity() {
-    }
+    public UsuarioEntity() {}
 
     public Integer getId() {
         return id;
@@ -52,9 +51,6 @@ public class UsuarioEntity extends Entity {
 
     @Override
     public String toString() {
-        return "UsuarioEntity[" +
-               "id=" + id +
-               ", nome='" + nome + "\'" +
-               "]";
+        return String.format("[id=%d, nome='%s']", id, nome);
     }
 }

@@ -1,5 +1,9 @@
 package prontvet;
 
+import static io.javalin.apibuilder.ApiBuilder.get;
+import static io.javalin.apibuilder.ApiBuilder.path;
+import static io.javalin.apibuilder.ApiBuilder.post;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,20 +15,31 @@ public class App {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
-        // Cria uma instância do Javalin.
-        Javalin app = Javalin.create();
+        // Inicializa as configurações da aplicação.
+        Config.load();
 
-        // Registra os controllers.
-        RootController.getInstance().register(app);
-        UsuarioController.getInstance().register(app);
+        // Cria uma instância do Javalin e configura as rotas da API.
+        Javalin app = Javalin.create(config -> {
+            config.useVirtualThreads = true;
+            config.showJavalinBanner = false;
+
+            config.router.apiBuilder(() -> {
+                path("/", () -> {
+                    get(RootController::hello);
+                });
+                path("/usuario", () -> {
+                    get(UsuarioController::hello);
+                    post(UsuarioController::register);
+                });
+            });
+        });
 
         // Inicia o servidor na porta especificada.
-        int port = Config.getInstance().getPort();
-        app.start(port);
+        app.start(Config.port);
 
         // Exibe uma mensagem de sucesso.
         Util.clearScreen();
         Util.printAsciiArt();
-        log.info("Servidor iniciado com sucesso na porta {}!", port);
+        log.info("Servidor iniciado com sucesso na porta {}!", Config.port);
     }
 }

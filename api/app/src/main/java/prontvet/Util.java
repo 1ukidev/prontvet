@@ -1,9 +1,5 @@
 package prontvet;
 
-import java.nio.charset.StandardCharsets;
-
-import io.javalin.http.Context;
-
 public class Util {
     private static final String[] asciiArt = {
         " ____                  _             _        ",
@@ -29,14 +25,5 @@ public class Util {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-    }
-
-    /**
-     * Aplica o charset UTF-8 a uma requisição.
-     * 
-     * @param ctx Contexto da requisição.
-     */
-    public static void applyUTF8(Context ctx) {
-        ctx.res().setCharacterEncoding(StandardCharsets.UTF_8.name());
     }
 }

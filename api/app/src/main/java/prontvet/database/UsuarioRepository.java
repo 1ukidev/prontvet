@@ -10,13 +10,9 @@ import prontvet.Config;
 import prontvet.entities.UsuarioEntity;
 
 public class UsuarioRepository implements Repository<UsuarioEntity> {
-    private final String dbUrl = Config.getInstance().getDbUrl();
-    private final String dbUser = Config.getInstance().getDbUser();
-    private final String dbPassword = Config.getInstance().getDbPassword();
-
     public UsuarioEntity save(UsuarioEntity entity) {
         try {
-            Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            Connection conn = DriverManager.getConnection(Config.dbUrl, Config.dbUser, Config.dbPassword);
 
             String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
