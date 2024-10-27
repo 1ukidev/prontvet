@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Util {
-    public static void openView(String view, String title, Stage stage, Config extraConfig) {
+    public static void openView(String view, String title, Stage stage) {
         try {
             Parent root = FXMLLoader.load(Util.class.getResource("/view/" + view + ".fxml"));
             Scene scene = new Scene(root);
@@ -24,25 +24,19 @@ public class Util {
                 currentStage = new Stage();
             }
 
-            if (extraConfig != null) {
-                extraConfig.run(currentStage);
-            }
-
             currentStage.getIcons().add(logo);
             currentStage.setScene(scene);
             currentStage.setTitle(title);
+            currentStage.setResizable(false);
+            currentStage.centerOnScreen();
             currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void openView(String view, String title, Stage stage) {
-        openView(view, title, stage, null);
-    }
-
-    public static void openView(String view, String title, Config extraConfig) {
-        openView(view, title, null, extraConfig);
+    public static void openView(String view, String title) {
+        openView(view, title, null);
     }
 
     public static void showError(String message) {

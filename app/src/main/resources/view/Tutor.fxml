@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="477.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.TutorController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.TutorController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="38.0" prefWidth="560.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Nome:">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Nome:" textFill="#111111">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -24,12 +23,12 @@
                         <Insets right="8.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtNome" />
+                  <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="179.0" />
                </children>
             </HBox>
-            <HBox prefHeight="38.0" prefWidth="560.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Telefone:">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Telefone:" textFill="#111111">
                      <HBox.margin>
                         <Insets right="8.0" />
                      </HBox.margin>
@@ -37,12 +36,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtTelefone" />
+                  <TextField fx:id="txtTelefone" prefHeight="25.0" prefWidth="179.0" />
                </children>
             </HBox>
-            <HBox prefHeight="42.0" prefWidth="560.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Endereço:">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Endereço:" textFill="#111111">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -50,10 +49,13 @@
                         <Insets right="8.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtEndereco" />
+                  <TextField fx:id="txtEndereco" prefHeight="25.0" prefWidth="179.0" />
                </children>
             </HBox>
-            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar">
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin></Button>
          </children>
          <BorderPane.margin>
             <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

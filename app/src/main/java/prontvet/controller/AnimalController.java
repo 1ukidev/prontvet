@@ -1,7 +1,5 @@
 package prontvet.controller;
 
-import java.util.regex.PatternSyntaxException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.Util;
+import prontvet.dao.AnimalDAO;
 import prontvet.model.AnimalModel;
+import prontvet.table.AnimalTable;
 
 public class AnimalController {
 
@@ -44,14 +44,19 @@ public class AnimalController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            Log.debug("Cadastrando...");
-            Log.debug("Nome: " + model.nome);
-            Log.debug("Raça: " + model.raca);
-            Log.debug("Sexo: " + model.sexo);
-            Log.debug("Idade: " + model.idade);
-            Log.debug("Peso: " + model.peso);
-            Log.debug("Cadastrado com sucesso!");
-            Util.showSuccess("Animal cadastrado com sucesso!");
+            AnimalTable animalTable = new AnimalTable(
+                model.nome, model.raca, model.sexo, model.idade, model.peso
+            );
+            AnimalDAO.save(animalTable);
+
+            if (animalTable.getId() != null) {
+                Util.showSuccess("Animal cadastrado com sucesso!");
+                Log.debug("Animal cadastrado com sucesso!");
+                borderPane.getScene().getWindow().hide();
+            } else {
+                Util.showError("Erro ao cadastrar animal!");
+                Log.error("Erro ao cadastrar animal!");
+            }
         }
     }
 
@@ -95,22 +100,18 @@ public class AnimalController {
         });
 
         txtIdade.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                if (newValue.matches("\\d*")) {
-                    model.idade = Integer.parseInt(newValue);
-                } else {
-                    txtIdade.setText(oldValue);
-                }
-            } catch (PatternSyntaxException e) {}
+            if (newValue.matches("\\d*") && newValue.length() <= 3) {
+                model.idade = newValue.isEmpty() ? 0 : Integer.parseInt(newValue);
+            } else {
+                txtIdade.setText(oldValue);
+            }
         });
         txtPeso.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                if (newValue.matches("\\d*")) {
-                    model.peso = Double.parseDouble(newValue);
-                } else {
-                    txtPeso.setText(oldValue);
-                }
-            } catch (PatternSyntaxException e) {}
+            if (newValue.matches("\\d*(\\.\\d*)?") && newValue.length() <= 6) {
+                model.peso = newValue.isEmpty() || newValue.equals(".") ? 0d : Double.parseDouble(newValue);
+            } else {
+                txtPeso.setText(oldValue);
+            }
         });
     }
 

@@ -18,17 +18,29 @@ public class AppController {
     private Button btnCadastrarTutor;
 
     @FXML
+    private Button btnListarAnimais;
+
+    @FXML
+    private Button btnListarTutores;
+
+    @FXML
     void openCadastrarAnimal(ActionEvent event) {
-        Util.openView("Animal", "Cadastrar animal", e -> {
-            e.setResizable(false);
-        });
+        Util.openView("Animal", "Cadastrar animal");
     }
 
     @FXML
     void openCadastrarTutor(ActionEvent event) {
-        Util.openView("Tutor", "Cadastrar tutor", e -> {
-            e.setResizable(false);
-        });
+        Util.openView("Tutor", "Cadastrar tutor");
+    }
+
+    @FXML
+    void openListarAnimais(ActionEvent event) {
+        // TODO
+    }
+
+    @FXML
+    void openListarTutores(ActionEvent event) {
+        // TODO
     }
 
 }

@@ -1,19 +1,19 @@
-create database `prontvet`;
+CREATE DATABASE `prontvet`;
 
-use `prontvet`;
+USE `prontvet`;
 
-create table if not exists `animais` (
-	`id` int not null auto_increment primary key,
-	`nome` varchar(255) not null,
-	`raca` varchar(255) not null,
-	`sexo` char not null,
-	`idade` int not null,
-	`peso` double not null
+CREATE TABLE IF NOT EXISTS `animais` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`nome` VARCHAR(255) NOT NULL,
+	`raca` VARCHAR(255) NOT NULL,
+	`sexo` CHAR NOT NULL,
+	`idade` INT NOT NULL,
+	`peso` DOUBLE NOT NULL
 )
 
-create table if not exists `tutores` (
-	`id` int not null auto_increment primary key,
-	`nome` varchar(255) not null,
-	`telefone` varchar(255) not null,
-	`endereco` varchar(255) not null
+CREATE TABLE IF NOT EXISTS `tutores` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`nome` VARCHAR(255) NOT NULL,
+	`telefone` VARCHAR(255) NOT NULL,
+	`endereco` VARCHAR(255) NOT NULL
 )

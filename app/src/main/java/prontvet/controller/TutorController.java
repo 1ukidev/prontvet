@@ -1,7 +1,5 @@
 package prontvet.controller;
 
-import java.util.regex.PatternSyntaxException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.Util;
+import prontvet.dao.TutorDAO;
 import prontvet.model.TutorModel;
+import prontvet.table.TutorTable;
 
 public class TutorController {
 
@@ -33,12 +33,19 @@ public class TutorController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            Log.debug("Cadastrando...");
-            Log.debug("Nome: " + model.nome);
-            Log.debug("Telefone: " + model.telefone);
-            Log.debug("Endereço: " + model.endereco);
-            Log.debug("Cadastrado com sucesso!");
-            Util.showSuccess("Tutor cadastrado com sucesso!");
+            TutorTable tutorTable = new TutorTable(
+                model.nome, model.telefone, model.endereco
+            );
+            TutorDAO.save(tutorTable);
+
+            if (tutorTable.getId() != null) {
+                Util.showSuccess("Tutor cadastrado com sucesso!");
+                Log.debug("Tutor cadastrado com sucesso!");
+                borderPane.getScene().getWindow().hide();
+            } else {
+                Util.showError("Erro ao cadastrar tutor!");
+                Log.error("Erro ao cadastrar tutor!");
+            }
         }
     }
 
@@ -64,13 +71,11 @@ public class TutorController {
             model.nome = newValue;
         });
         txtTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                if (newValue.matches("\\d*")) {
-                    model.telefone = newValue;
-                } else {
-                    txtTelefone.setText(oldValue);
-                }
-            } catch (PatternSyntaxException e) {}
+            if (newValue.matches("\\d*") && newValue.length() <= 11) {
+                model.telefone = newValue.isEmpty() ? "" : newValue;
+            } else {
+                txtTelefone.setText(oldValue);
+            }
         });
         txtEndereco.textProperty().addListener((observable, oldValue, newValue) -> {
             model.endereco = newValue;

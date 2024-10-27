@@ -9,6 +9,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.mysql:mysql-connector-j:9.1.0'
+    implementation 'io.github.mkpaz:atlantafx-base:2.0.1'
 }
 
 javafx {
