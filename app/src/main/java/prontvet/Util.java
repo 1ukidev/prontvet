@@ -28,7 +28,7 @@ public class Util {
                 extraConfig.run(currentStage);
             }
 
-            currentStage.getIcons().add(new Image(Util.class.getResourceAsStream("/logo.png")));
+            currentStage.getIcons().add(logo);
             currentStage.setScene(scene);
             currentStage.setTitle(title);
             currentStage.show();
@@ -60,4 +60,6 @@ public class Util {
         alert.setHeaderText(message);
         alert.show();
     }
+
+    private static Image logo = new Image(Util.class.getResourceAsStream("/logo.png"));
 }
