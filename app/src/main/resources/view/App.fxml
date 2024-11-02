@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="135.0" minWidth="490.0" prefHeight="197.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.AppController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="106.0" minWidth="160.0" prefHeight="128.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.AppController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="49.0" prefWidth="653.0">
                <children>
-                  <Label text="ProntVet" textFill="#111111">
+                  <Label fx:id="label" textFill="#111111">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -29,22 +29,12 @@
             </VBox>
             <HBox prefHeight="84.0" prefWidth="516.0">
                <children>
-                  <Button fx:id="btnCadastrarAnimal" mnemonicParsing="false" onAction="#openCadastrarAnimal" text="Cadastrar animal">
+                  <Button fx:id="btnAnimais" mnemonicParsing="false" onAction="#openAnimais" text="Animais">
                      <HBox.margin>
                         <Insets right="12.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnCadastrarTutor" mnemonicParsing="false" onAction="#openCadastrarTutor" text="Cadastrar tutor" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="btnListarAnimais" mnemonicParsing="false" onAction="#openListarAnimais" text="Listar animais">
-                     <HBox.margin>
-                        <Insets right="12.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnListarTutores" mnemonicParsing="false" onAction="#openListarTutores" text="Listar tutores" />
+                  <Button fx:id="btnTutores" mnemonicParsing="false" onAction="#openTutores" text="Tutores" />
                </children>
             </HBox>
          </children>

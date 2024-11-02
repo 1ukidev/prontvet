@@ -8,6 +8,8 @@ public class AnimalTable {
     private Integer idade;
     private Double peso;
 
+    public AnimalTable() {}
+
     public AnimalTable(String nome, String raca, Character sexo, Integer idade, Double peso) {
         this.nome = nome;
         this.raca = raca;

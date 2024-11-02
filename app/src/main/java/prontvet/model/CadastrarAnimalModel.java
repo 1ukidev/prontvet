@@ -1,6 +1,6 @@
 package prontvet.model;
 
-public class AnimalModel {
+public class CadastrarAnimalModel {
     public String nome;
     public String raca;
     public Character sexo;

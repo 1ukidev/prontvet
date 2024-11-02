@@ -11,7 +11,7 @@ import prontvet.dao.TutorDAO;
 import prontvet.model.TutorModel;
 import prontvet.table.TutorTable;
 
-public class TutorController {
+public class CadastrarTutorController {
 
     @FXML
     private BorderPane borderPane;
@@ -36,7 +36,7 @@ public class TutorController {
             TutorTable tutorTable = new TutorTable(
                 model.nome, model.telefone, model.endereco
             );
-            TutorDAO.save(tutorTable);
+            TutorDAO.getInstance().save(tutorTable);
 
             if (tutorTable.getId() != null) {
                 Util.showSuccess("Tutor cadastrado com sucesso!");

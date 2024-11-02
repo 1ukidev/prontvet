@@ -6,6 +6,8 @@ public class TutorTable {
     private String telefone;
     private String endereco;
 
+    public TutorTable() {}
+
     public TutorTable(String nome, String telefone, String endereco) {
         this.nome = nome;
         this.telefone = telefone;

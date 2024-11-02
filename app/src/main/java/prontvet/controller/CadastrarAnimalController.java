@@ -10,10 +10,10 @@ import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.AnimalDAO;
-import prontvet.model.AnimalModel;
+import prontvet.model.CadastrarAnimalModel;
 import prontvet.table.AnimalTable;
 
-public class AnimalController {
+public class CadastrarAnimalController {
 
     @FXML
     private BorderPane borderPane;
@@ -39,7 +39,7 @@ public class AnimalController {
     @FXML
     private ChoiceBox<String> boxSexo;
 
-    private AnimalModel model = new AnimalModel();
+    private CadastrarAnimalModel model = new CadastrarAnimalModel();
 
     @FXML
     void cadastrar(ActionEvent event) {
@@ -47,7 +47,7 @@ public class AnimalController {
             AnimalTable animalTable = new AnimalTable(
                 model.nome, model.raca, model.sexo, model.idade, model.peso
             );
-            AnimalDAO.save(animalTable);
+            AnimalDAO.getInstance().save(animalTable);
 
             if (animalTable.getId() != null) {
                 Util.showSuccess("Animal cadastrado com sucesso!");
@@ -85,7 +85,7 @@ public class AnimalController {
     }
 
     @FXML
-    public void initialize() {
+    void initialize() {
         boxSexo.getItems().add("Macho");
         boxSexo.getItems().add("Fêmea");
 
