@@ -2,8 +2,8 @@ package prontvet.model;
 
 import java.util.List;
 
-import prontvet.table.TutorTable;
+import prontvet.table.TutorEntity;
 
 public class ListaTutoresModel {
-    public List<TutorTable> tutores;
+    public List<TutorEntity> tutores;
 }

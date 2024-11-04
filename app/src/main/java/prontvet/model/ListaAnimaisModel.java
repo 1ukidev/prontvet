@@ -2,8 +2,8 @@ package prontvet.model;
 
 import java.util.List;
 
-import prontvet.table.AnimalTable;
+import prontvet.table.AnimalEntity;
 
 public class ListaAnimaisModel {
-    public List<AnimalTable> animais;
+    public List<AnimalEntity> animais;
 }

@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Util {
     public static void openView(String view, String title, Stage stage) {
@@ -41,7 +40,6 @@ public class Util {
 
     public static void showError(String message) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.initStyle(StageStyle.UTILITY);
         alert.setTitle("");
         alert.setHeaderText(message);
         alert.show();
@@ -49,7 +47,6 @@ public class Util {
 
     public static void showSuccess(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.initStyle(StageStyle.UTILITY);
         alert.setTitle("");
         alert.setHeaderText(message);
         alert.show();

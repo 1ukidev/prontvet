@@ -8,9 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import prontvet.Util;
-import prontvet.dao.OthersDAO;
 
-public class AppController {
+public class MainController {
 
     @FXML
     private BorderPane borderPane;
@@ -36,9 +35,6 @@ public class AppController {
 
     @FXML
     void initialize() {
-        // Verificar se o banco de dados está funcionando.
-        OthersDAO.test();
-
         // Definir a saudação de acordo com o horário.
         int hours = LocalTime.now().getHour();
         if (hours >= 6 && hours < 12) {

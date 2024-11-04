@@ -1,14 +1,14 @@
 package prontvet.table;
 
-public class TutorTable {
+public class TutorEntity {
     private Integer id;
     private String nome;
     private String telefone;
     private String endereco;
 
-    public TutorTable() {}
+    public TutorEntity() {}
 
-    public TutorTable(String nome, String telefone, String endereco) {
+    public TutorEntity(String nome, String telefone, String endereco) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;

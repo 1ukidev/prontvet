@@ -1,6 +1,6 @@
 package prontvet.table;
 
-public class AnimalTable {
+public class AnimalEntity {
     private Integer id;
     private String nome;
     private String raca;
@@ -8,9 +8,9 @@ public class AnimalTable {
     private Integer idade;
     private Double peso;
 
-    public AnimalTable() {}
+    public AnimalEntity() {}
 
-    public AnimalTable(String nome, String raca, Character sexo, Integer idade, Double peso) {
+    public AnimalEntity(String nome, String raca, Character sexo, Integer idade, Double peso) {
         this.nome = nome;
         this.raca = raca;
         this.sexo = sexo;
@@ -64,10 +64,5 @@ public class AnimalTable {
 
     public void setPeso(Double peso) {
         this.peso = peso;
-    }
-
-    @Override
-    public String toString() {
-        return "AnimalTable";
     }
 }

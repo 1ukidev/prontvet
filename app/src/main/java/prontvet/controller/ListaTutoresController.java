@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.dao.TutorDAO;
 import prontvet.model.ListaTutoresModel;
-import prontvet.table.TutorTable;
+import prontvet.table.TutorEntity;
 
 public class ListaTutoresController {
 
@@ -16,28 +16,28 @@ public class ListaTutoresController {
     private BorderPane borderPane;
 
     @FXML
-    private TableView<TutorTable> table;
+    private TableView<TutorEntity> table;
 
     @FXML
-    private TableColumn<TutorTable, String> endereco;
+    private TableColumn<TutorEntity, String> endereco;
 
     @FXML
-    private TableColumn<TutorTable, Integer> id;
+    private TableColumn<TutorEntity, Integer> id;
 
     @FXML
-    private TableColumn<TutorTable, String> nome;
+    private TableColumn<TutorEntity, String> nome;
 
     @FXML
-    private TableColumn<TutorTable, String> telefone;
+    private TableColumn<TutorEntity, String> telefone;
 
     private ListaTutoresModel model = new ListaTutoresModel();
 
     @FXML
     void initialize() {
-        id.setCellValueFactory(new PropertyValueFactory<TutorTable, Integer>("id"));
-        nome.setCellValueFactory(new PropertyValueFactory<TutorTable, String>("nome"));
-        endereco.setCellValueFactory(new PropertyValueFactory<TutorTable, String>("endereco"));
-        telefone.setCellValueFactory(new PropertyValueFactory<TutorTable, String>("telefone"));
+        id.setCellValueFactory(new PropertyValueFactory<TutorEntity, Integer>("id"));
+        nome.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("nome"));
+        endereco.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("endereco"));
+        telefone.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("telefone"));
 
         Log.debug("Buscando tutores no banco de dados...");
         model.tutores = TutorDAO.getInstance().findAll();

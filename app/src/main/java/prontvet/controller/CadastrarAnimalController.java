@@ -11,7 +11,7 @@ import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.AnimalDAO;
 import prontvet.model.CadastrarAnimalModel;
-import prontvet.table.AnimalTable;
+import prontvet.table.AnimalEntity;
 
 public class CadastrarAnimalController {
 
@@ -44,7 +44,7 @@ public class CadastrarAnimalController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            AnimalTable animalTable = new AnimalTable(
+            AnimalEntity animalTable = new AnimalEntity(
                 model.nome, model.raca, model.sexo, model.idade, model.peso
             );
             AnimalDAO.getInstance().save(animalTable);

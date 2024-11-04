@@ -9,7 +9,7 @@ import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.TutorDAO;
 import prontvet.model.TutorModel;
-import prontvet.table.TutorTable;
+import prontvet.table.TutorEntity;
 
 public class CadastrarTutorController {
 
@@ -33,7 +33,7 @@ public class CadastrarTutorController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            TutorTable tutorTable = new TutorTable(
+            TutorEntity tutorTable = new TutorEntity(
                 model.nome, model.telefone, model.endereco
             );
             TutorDAO.getInstance().save(tutorTable);

@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.dao.AnimalDAO;
 import prontvet.model.ListaAnimaisModel;
-import prontvet.table.AnimalTable;
+import prontvet.table.AnimalEntity;
 
 public class ListaAnimaisController {
 
@@ -16,36 +16,36 @@ public class ListaAnimaisController {
     private BorderPane borderPane;
 
     @FXML
-    private TableView<AnimalTable> table;
+    private TableView<AnimalEntity> table;
 
     @FXML
-    private TableColumn<AnimalTable, Integer> id;
+    private TableColumn<AnimalEntity, Integer> id;
 
     @FXML
-    private TableColumn<AnimalTable, Integer> idade;
+    private TableColumn<AnimalEntity, Integer> idade;
 
     @FXML
-    private TableColumn<AnimalTable, String> nome;
+    private TableColumn<AnimalEntity, String> nome;
 
     @FXML
-    private TableColumn<AnimalTable, Double> peso;
+    private TableColumn<AnimalEntity, Double> peso;
 
     @FXML
-    private TableColumn<AnimalTable, String> raca;
+    private TableColumn<AnimalEntity, String> raca;
 
     @FXML
-    private TableColumn<AnimalTable, Character> sexo;
+    private TableColumn<AnimalEntity, Character> sexo;
 
     private ListaAnimaisModel model = new ListaAnimaisModel();
 
     @FXML
     void initialize() {
-        id.setCellValueFactory(new PropertyValueFactory<AnimalTable, Integer>("id"));
-        idade.setCellValueFactory(new PropertyValueFactory<AnimalTable, Integer>("idade"));
-        nome.setCellValueFactory(new PropertyValueFactory<AnimalTable, String>("nome"));
-        peso.setCellValueFactory(new PropertyValueFactory<AnimalTable, Double>("peso"));
-        raca.setCellValueFactory(new PropertyValueFactory<AnimalTable, String>("raca"));
-        sexo.setCellValueFactory(new PropertyValueFactory<AnimalTable, Character>("sexo"));
+        id.setCellValueFactory(new PropertyValueFactory<AnimalEntity, Integer>("id"));
+        idade.setCellValueFactory(new PropertyValueFactory<AnimalEntity, Integer>("idade"));
+        nome.setCellValueFactory(new PropertyValueFactory<AnimalEntity, String>("nome"));
+        peso.setCellValueFactory(new PropertyValueFactory<AnimalEntity, Double>("peso"));
+        raca.setCellValueFactory(new PropertyValueFactory<AnimalEntity, String>("raca"));
+        sexo.setCellValueFactory(new PropertyValueFactory<AnimalEntity, Character>("sexo"));
 
         Log.debug("Buscando animais no banco de dados...");
         model.animais = AnimalDAO.getInstance().findAll();

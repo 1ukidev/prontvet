@@ -12,10 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import prontvet.table.AnimalTable;
+import prontvet.table.AnimalEntity;
 
-public class AnimalDAO implements DAO<AnimalTable> {
-    public AnimalTable save(AnimalTable animal) {
+public class AnimalDAO implements DAO<AnimalEntity> {
+    public AnimalEntity save(AnimalEntity animal) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
@@ -44,8 +44,8 @@ public class AnimalDAO implements DAO<AnimalTable> {
         return animal;
     }
 
-    public List<AnimalTable> findAll() {
-        List<AnimalTable> animais = new ArrayList<>();
+    public List<AnimalEntity> findAll() {
+        List<AnimalEntity> animais = new ArrayList<>();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -55,7 +55,7 @@ public class AnimalDAO implements DAO<AnimalTable> {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                AnimalTable animal = new AnimalTable();
+                AnimalEntity animal = new AnimalEntity();
                 animal.setId(rs.getInt("id"));
                 animal.setNome(rs.getString("nome"));
                 animal.setRaca(rs.getString("raca"));

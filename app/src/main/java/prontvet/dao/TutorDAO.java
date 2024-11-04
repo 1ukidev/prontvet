@@ -12,10 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import prontvet.table.TutorTable;
+import prontvet.table.TutorEntity;
 
-public class TutorDAO implements DAO<TutorTable> {
-    public TutorTable save(TutorTable tutor) {
+public class TutorDAO implements DAO<TutorEntity> {
+    public TutorEntity save(TutorEntity tutor) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
@@ -42,8 +42,8 @@ public class TutorDAO implements DAO<TutorTable> {
         return tutor;
     }
 
-    public List<TutorTable> findAll() {
-        List<TutorTable> tutores = new ArrayList<>();
+    public List<TutorEntity> findAll() {
+        List<TutorEntity> tutores = new ArrayList<>();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -53,7 +53,7 @@ public class TutorDAO implements DAO<TutorTable> {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                TutorTable tutor = new TutorTable();
+                TutorEntity tutor = new TutorEntity();
                 tutor.setId(rs.getInt("id"));
                 tutor.setNome(rs.getString("nome"));
                 tutor.setTelefone(rs.getString("telefone"));
