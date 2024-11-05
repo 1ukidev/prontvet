@@ -15,7 +15,7 @@ public class MainController {
     private BorderPane borderPane;
 
     @FXML
-    private Button btnAnimais;
+    private Button btnPacientes;
 
     @FXML
     private Button btnTutores;
@@ -24,8 +24,8 @@ public class MainController {
     private Label label;
 
     @FXML
-    void openAnimais(ActionEvent event) {
-        Util.openView("Animais", "Animais");
+    void openPacientes(ActionEvent event) {
+        Util.openView("Pacientes", "Pacientes");
     }
 
     @FXML

@@ -14,7 +14,7 @@
          <children>
             <VBox prefHeight="49.0" prefWidth="653.0">
                <children>
-                  <Label fx:id="label" textFill="#111111">
+                  <Label fx:id="label" textFill="#dddddd">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -29,7 +29,7 @@
             </VBox>
             <HBox prefHeight="84.0" prefWidth="516.0">
                <children>
-                  <Button fx:id="btnAnimais" mnemonicParsing="false" onAction="#openAnimais" text="Animais">
+                  <Button fx:id="btnPacientes" mnemonicParsing="false" onAction="#openPacientes" text="Pacientes">
                      <HBox.margin>
                         <Insets right="12.0" />
                      </HBox.margin>

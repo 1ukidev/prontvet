@@ -16,4 +16,18 @@ public interface DAO<T> {
      * @param t
      */
     List<T> findAll();
+
+    /**
+     * Atualiza um objeto no banco de dados.
+     * 
+     * @param t
+     */
+    void update(T t);
+
+    /**
+     * Deleta um objeto no banco de dados.
+     * 
+     * @param t
+     */
+    void delete(T t);
 }

@@ -1,13 +1,9 @@
 package prontvet.dao;
 
-import static prontvet.Constants.DB_PASSWORD;
-import static prontvet.Constants.DB_URL;
-import static prontvet.Constants.DB_USER;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +13,7 @@ import prontvet.table.UsuarioEntity;
 public class UsuarioDAO implements DAO<UsuarioEntity> {
     public UsuarioEntity save(UsuarioEntity usuario) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = ConnectionDAO.create();
 
             String sql = "INSERT INTO usuarios (email, senha) VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -34,7 +30,7 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
 
             pstmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -45,7 +41,7 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
         List<UsuarioEntity> usuarios = new ArrayList<>();
 
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = ConnectionDAO.create();
 
             String sql = "SELECT * FROM usuarios";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -61,7 +57,7 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
 
             pstmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -70,7 +66,7 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
 
     public boolean find(UsuarioEntity usuario) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = ConnectionDAO.create();
 
             String sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -87,11 +83,48 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
 
             pstmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return false;
+    }
+
+    public void update(UsuarioEntity usuario) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "UPDATE usuarios SET email = ?, senha = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            int i = 0;
+            pstmt.setString(++i, usuario.getEmail());
+            pstmt.setString(++i, usuario.getSenha());
+            pstmt.setInt(++i, usuario.getId());
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(UsuarioEntity usuario) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "DELETE FROM usuarios WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, usuario.getId());
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // Singleton

@@ -10,14 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="251.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.CadastroController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="475.0">
                <children>
-                  <Label text="E-mail:">
+                  <Label text="E-mail:" textFill="#dddddd">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -34,7 +33,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="37.0" prefWidth="475.0">
                <children>
-                  <Label text="Senha:">
+                  <Label text="Senha:" textFill="#dddddd">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -47,7 +46,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="475.0">
                <children>
-                  <Label text="Repita a senha:">
+                  <Label text="Repita a senha:" textFill="#dddddd">
                      <HBox.margin>
                         <Insets right="8.0" />
                      </HBox.margin>

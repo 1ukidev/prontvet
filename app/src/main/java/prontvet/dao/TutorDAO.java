@@ -1,13 +1,9 @@
 package prontvet.dao;
 
-import static prontvet.Constants.DB_PASSWORD;
-import static prontvet.Constants.DB_URL;
-import static prontvet.Constants.DB_USER;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +13,7 @@ import prontvet.table.TutorEntity;
 public class TutorDAO implements DAO<TutorEntity> {
     public TutorEntity save(TutorEntity tutor) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = ConnectionDAO.create();
 
             String sql = "INSERT INTO tutores (nome, telefone, endereco) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -35,7 +31,7 @@ public class TutorDAO implements DAO<TutorEntity> {
 
             pstmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -46,7 +42,7 @@ public class TutorDAO implements DAO<TutorEntity> {
         List<TutorEntity> tutores = new ArrayList<>();
 
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = ConnectionDAO.create();
 
             String sql = "SELECT * FROM tutores";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -63,11 +59,49 @@ public class TutorDAO implements DAO<TutorEntity> {
 
             pstmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return tutores;
+    }
+
+    public void update(TutorEntity tutor) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "UPDATE tutores SET nome = ?, telefone = ?, endereco = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            int i = 0;
+            pstmt.setString(++i, tutor.getNome());
+            pstmt.setString(++i, tutor.getTelefone());
+            pstmt.setString(++i, tutor.getEndereco());
+            pstmt.setInt(++i, tutor.getId());
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(TutorEntity tutor) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "DELETE FROM tutores WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, tutor.getId());
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // Singleton

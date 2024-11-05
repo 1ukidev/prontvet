@@ -50,7 +50,7 @@ public class CadastroController {
 
     private boolean validateModel() {
         if (model.email == null || model.email.isEmpty()) {
-            Util.showError("O email precisa ser preenchido!");
+            Util.showError("O e-mail precisa ser preenchido!");
             return false;
         }
         if (model.senha == null || model.senha.isEmpty()) {

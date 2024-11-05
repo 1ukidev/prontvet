@@ -9,11 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import prontvet.Log;
 import prontvet.Util;
-import prontvet.dao.AnimalDAO;
-import prontvet.model.CadastrarAnimalModel;
-import prontvet.table.AnimalEntity;
+import prontvet.dao.PacienteDAO;
+import prontvet.model.CadastrarPacienteModel;
+import prontvet.table.PacienteEntity;
 
-public class CadastrarAnimalController {
+public class CadastrarPacienteController {
 
     @FXML
     private BorderPane borderPane;
@@ -39,23 +39,23 @@ public class CadastrarAnimalController {
     @FXML
     private ChoiceBox<String> boxSexo;
 
-    private CadastrarAnimalModel model = new CadastrarAnimalModel();
+    private CadastrarPacienteModel model = new CadastrarPacienteModel();
 
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            AnimalEntity animalTable = new AnimalEntity(
+            PacienteEntity pacienteEntity = new PacienteEntity(
                 model.nome, model.raca, model.sexo, model.idade, model.peso
             );
-            AnimalDAO.getInstance().save(animalTable);
+            PacienteDAO.getInstance().save(pacienteEntity);
 
-            if (animalTable.getId() != null) {
-                Util.showSuccess("Animal cadastrado com sucesso!");
-                Log.debug("Animal cadastrado com sucesso!");
+            if (pacienteEntity.getId() != null) {
+                Util.showSuccess("Paciente cadastrado com sucesso!");
+                Log.debug("Paciente cadastrado com sucesso!");
                 borderPane.getScene().getWindow().hide();
             } else {
-                Util.showError("Erro ao cadastrar animal!");
-                Log.error("Erro ao cadastrar animal!");
+                Util.showError("Erro ao cadastrar paciente!");
+                Log.error("Erro ao cadastrar paciente!");
             }
         }
     }

@@ -1,6 +1,6 @@
 package prontvet.table;
 
-public class AnimalEntity {
+public class PacienteEntity {
     private Integer id;
     private String nome;
     private String raca;
@@ -8,9 +8,9 @@ public class AnimalEntity {
     private Integer idade;
     private Double peso;
 
-    public AnimalEntity() {}
+    public PacienteEntity() {}
 
-    public AnimalEntity(String nome, String raca, Character sexo, Integer idade, Double peso) {
+    public PacienteEntity(String nome, String raca, Character sexo, Integer idade, Double peso) {
         this.nome = nome;
         this.raca = raca;
         this.sexo = sexo;

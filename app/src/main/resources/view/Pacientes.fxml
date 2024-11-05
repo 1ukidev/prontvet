@@ -5,19 +5,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.AnimaisController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.PacientesController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="365.0" prefWidth="250.0">
                <children>
-                  <Button fx:id="btnCadastrarAnimal" mnemonicParsing="false" onAction="#openCadastrarAnimal" text="Cadastrar animal">
+                  <Button fx:id="btnCadastrarPaciente" mnemonicParsing="false" onAction="#openCadastrarPaciente" text="Cadastrar paciente">
                      <VBox.margin>
                         <Insets bottom="24.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnListarAnimais" mnemonicParsing="false" onAction="#openListarAnimais" text="Listar animais" />
+                  <Button fx:id="btnListaDePacientes" mnemonicParsing="false" onAction="#openListaDePacientes" text="Lista de pacientes" />
                </children>
             </VBox>
          </children>

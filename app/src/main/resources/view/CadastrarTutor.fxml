@@ -15,7 +15,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Nome:" textFill="#111111">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Nome:" textFill="#dddddd">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -28,7 +28,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Telefone:" textFill="#111111">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Telefone:" textFill="#dddddd">
                      <HBox.margin>
                         <Insets right="8.0" />
                      </HBox.margin>
@@ -41,7 +41,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="483.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="75.0" text="Endereço:" textFill="#111111">
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Endereço:" textFill="#dddddd">
                      <font>
                         <Font size="16.0" />
                      </font>
