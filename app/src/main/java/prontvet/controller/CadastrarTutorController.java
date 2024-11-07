@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.TutorDAO;
@@ -41,7 +42,7 @@ public class CadastrarTutorController {
             if (tutorTable.getId() != null) {
                 Util.showSuccess("Tutor cadastrado com sucesso!");
                 Log.debug("Tutor cadastrado com sucesso!");
-                borderPane.getScene().getWindow().hide();
+                ((Stage) borderPane.getScene().getWindow()).close();
             } else {
                 Util.showError("Erro ao cadastrar tutor!");
                 Log.error("Erro ao cadastrar tutor!");

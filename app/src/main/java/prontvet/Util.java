@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Util {
-    public static void openView(String view, String title, Stage stage) {
+    public static void openView(String view, String title, Stage stage, Config extraConfig) {
         try {
             Parent root = FXMLLoader.load(Util.class.getResource("/view/" + view + ".fxml"));
             Scene scene = new Scene(root);
@@ -27,6 +27,11 @@ public class Util {
             currentStage.setScene(scene);
             currentStage.setTitle(title);
             currentStage.setResizable(false);
+
+            if (extraConfig != null) {
+                extraConfig.run(currentStage);
+            }
+
             currentStage.centerOnScreen();
             currentStage.show();
         } catch (IOException e) {
@@ -34,8 +39,16 @@ public class Util {
         }
     }
 
+    public static void openView(String view, String title, Stage stage) {
+        openView(view, title, stage, null);
+    }
+
+    public static void openView(String view, String title, Config extraConfig) {
+        openView(view, title, null, extraConfig);
+    }
+
     public static void openView(String view, String title) {
-        openView(view, title, null);
+        openView(view, title, null, null);
     }
 
     public static void showError(String message) {

@@ -24,7 +24,11 @@ public class PacientesController {
 
     @FXML
     void openListaDePacientes(ActionEvent event) {
-        Util.openView("ListaPacientes", "Lista de pacientes");
+        Util.openView("ListaPacientes", "Lista de pacientes", stage -> {
+            stage.setResizable(true);
+            stage.setMinWidth(900);
+            stage.setMinHeight(500);
+        });
     }
 
 }

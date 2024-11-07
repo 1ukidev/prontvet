@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.PacienteDAO;
@@ -52,7 +53,7 @@ public class CadastrarPacienteController {
             if (pacienteEntity.getId() != null) {
                 Util.showSuccess("Paciente cadastrado com sucesso!");
                 Log.debug("Paciente cadastrado com sucesso!");
-                borderPane.getScene().getWindow().hide();
+                ((Stage) borderPane.getScene().getWindow()).close();
             } else {
                 Util.showError("Erro ao cadastrar paciente!");
                 Log.error("Erro ao cadastrar paciente!");

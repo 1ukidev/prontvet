@@ -24,7 +24,11 @@ public class TutoresController {
 
     @FXML
     void openListarTutores(ActionEvent event) {
-        Util.openView("ListaTutores", "Lista de tutores");
+        Util.openView("ListaTutores", "Lista de tutores", stage -> {
+            stage.setResizable(true);
+            stage.setMinWidth(900);
+            stage.setMinHeight(500);
+        });
     }
 
 }
