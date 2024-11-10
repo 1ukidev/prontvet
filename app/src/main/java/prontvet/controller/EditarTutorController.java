@@ -33,7 +33,7 @@ public class EditarTutorController {
 
     @FXML
     void editar(ActionEvent event) {
-        if (validateModel()) {
+        if (model.validate()) {
             if (TutorDAO.getInstance().update(model.tutorEntity)) {
                 Util.showSuccess("Tutor editado com sucesso!");
                 Log.debug("Tutor editado com sucesso!");
@@ -45,26 +45,6 @@ public class EditarTutorController {
         }
     }
 
-    private boolean validateModel() {
-        if (model.tutorEntity == null) {
-            Util.showError("Erro ao editar tutor!");
-            return false;
-        }
-        if (model.tutorEntity.getNome() == null || model.tutorEntity.getNome().isEmpty()) {
-            Util.showError("O nome precisa ser preenchido!");
-            return false;
-        }
-        if (model.tutorEntity.getTelefone() == null || model.tutorEntity.getTelefone().isEmpty()) {
-            Util.showError("O telefone precisa ser preenchido!");
-            return false;
-        }
-        if (model.tutorEntity.getEndereco() == null || model.tutorEntity.getEndereco().isEmpty()) {
-            Util.showError("O endereço precisa ser preenchido!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     void initialize(TutorEntity tutorEntity) {
         if (tutorEntity != null) {
@@ -74,6 +54,10 @@ public class EditarTutorController {
             txtEndereco.setText(tutorEntity.getEndereco());
         }
 
+        addBindings();
+    }
+
+    private void addBindings() {
         txtNome.textProperty().addListener((observable, oldValue, newValue) -> {
             model.tutorEntity.setNome(newValue);
         });

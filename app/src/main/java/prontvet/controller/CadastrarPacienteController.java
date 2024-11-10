@@ -53,7 +53,7 @@ public class CadastrarPacienteController {
 
     @FXML
     void cadastrar(ActionEvent event) {
-        if (validateModel()) {
+        if (model.validate()) {
             PacienteDAO.getInstance().save(model.pacienteEntity);
 
             if (model.pacienteEntity.getId() != null) {
@@ -67,38 +67,6 @@ public class CadastrarPacienteController {
         }
     }
 
-    private boolean validateModel() {
-        if (model.pacienteEntity.getTutor() == null) {
-            Util.showError("O tutor precisa ser selecionado!");
-            return false;
-        }
-        if (model.pacienteEntity.getNome() == null || model.pacienteEntity.getNome().isEmpty()) {
-            Util.showError("O nome precisa ser preenchido!");
-            return false;
-        }
-        if (model.pacienteEntity.getRaca() == null || model.pacienteEntity.getRaca().isEmpty()) {
-            Util.showError("A raça precisa ser preenchida!");
-            return false;
-        }
-        if (model.pacienteEntity.getSexo() == null) {
-            Util.showError("O sexo precisa ser selecionado!");
-            return false;
-        }
-        if (model.pacienteEntity.getIdade() <= 0) {
-            Util.showError("A idade precisa ser preenchida!");
-            return false;
-        }
-        if (model.pacienteEntity.getPeso() <= 0d) {
-            Util.showError("O peso precisa ser preenchido!");
-            return false;
-        }
-        if (model.pacienteEntity.getDescricao() == null || model.pacienteEntity.getDescricao().isEmpty()) {
-            Util.showError("A descrição precisa ser preenchida!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     void initialize() {
         boxSexo.getItems().add("Macho");
@@ -109,6 +77,10 @@ public class CadastrarPacienteController {
             boxTutor.getItems().addAll(tutorEntities);
         }
 
+        addBindings();
+    }
+
+    private void addBindings() {
         boxTutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             model.pacienteEntity.setTutor(newValue);
         });

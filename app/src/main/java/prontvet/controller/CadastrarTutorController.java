@@ -32,7 +32,7 @@ public class CadastrarTutorController {
 
     @FXML
     void cadastrar(ActionEvent event) {
-        if (validateModel()) {
+        if (model.validate()) {
             TutorDAO.getInstance().save(model.tutorEntity);
 
             if (model.tutorEntity.getId() != null) {
@@ -46,24 +46,12 @@ public class CadastrarTutorController {
         }
     }
 
-    private boolean validateModel() {
-        if (model.tutorEntity.getNome() == null || model.tutorEntity.getNome().isEmpty()) {
-            Util.showError("O nome precisa ser preenchido!");
-            return false;
-        }
-        if (model.tutorEntity.getTelefone() == null || model.tutorEntity.getTelefone().isEmpty()) {
-            Util.showError("O telefone precisa ser preenchido!");
-            return false;
-        }
-        if (model.tutorEntity.getEndereco() == null || model.tutorEntity.getEndereco().isEmpty()) {
-            Util.showError("O endereço precisa ser preenchido!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     void initialize() {
+        addBindings();
+    }
+
+    private void addBindings() {
         txtNome.textProperty().addListener((observable, oldValue, newValue) -> {
             model.tutorEntity.setNome(newValue);
         });

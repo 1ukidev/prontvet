@@ -33,7 +33,7 @@ public class CadastroController {
 
     @FXML
     void cadastrar(ActionEvent event) {
-        if (validateModel()) {
+        if (model.validate()) {
             UsuarioDAO.getInstance().save(model.usuarioEntity);
 
             if (model.usuarioEntity.getId() != null) {
@@ -47,28 +47,12 @@ public class CadastroController {
         }
     }
 
-    private boolean validateModel() {
-        if (model.usuarioEntity.getEmail() == null || model.usuarioEntity.getEmail().isEmpty()) {
-            Util.showError("O e-mail precisa ser preenchido!");
-            return false;
-        }
-        if (model.usuarioEntity.getSenha() == null || model.usuarioEntity.getSenha().isEmpty()) {
-            Util.showError("A senha precisa ser preenchida!");
-            return false;
-        }
-        if (model.repitaSenha == null || model.repitaSenha.isEmpty()) {
-            Util.showError("A senha precisa ser repetida!");
-            return false;
-        }
-        if (!model.usuarioEntity.getSenha().equals(model.repitaSenha)) {
-            Util.showError("As senhas não conferem!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     void initialize() {
+        addBindings();
+    }
+
+    private void addBindings() {
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
             model.usuarioEntity.setEmail(newValue);
         });

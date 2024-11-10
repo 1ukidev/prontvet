@@ -42,10 +42,7 @@ public class ListaTutoresController {
 
     @FXML
     void initialize() {
-        id.setCellValueFactory(new PropertyValueFactory<TutorEntity, Integer>("id"));
-        nome.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("nome"));
-        endereco.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("endereco"));
-        telefone.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("telefone"));
+        addBindings();
 
         criarMenuContexto();
         table.setOnMouseClicked(e -> {
@@ -66,43 +63,64 @@ public class ListaTutoresController {
         }
     }
 
+    private void addBindings() {
+        id.setCellValueFactory(new PropertyValueFactory<TutorEntity, Integer>("id"));
+        nome.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("nome"));
+        endereco.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("endereco"));
+        telefone.setCellValueFactory(new PropertyValueFactory<TutorEntity, String>("telefone"));
+    }
+
     private void criarMenuContexto() {
         MenuItem item = new MenuItem("Editar");
-        item.setOnAction(e -> {
-            TutorEntity tutorEntity = table.getSelectionModel().getSelectedItem();
-            Util.openView("EditarTutor", "Editando tutor " + tutorEntity.getNome(),  (stage, loader) -> {
-                EditarTutorController controller = (EditarTutorController) loader.getController();
-                controller.initialize(tutorEntity);
-
-                stage.setOnHidden(event -> {
-                    table.getItems().clear();
-                    model.tutores = TutorDAO.getInstance().findAll();
-                    table.getItems().addAll(model.tutores);
-                });
-            });
-        });
+        item.setOnAction(e -> editarTutor());
 
         MenuItem item2 = new MenuItem("Excluir");
-        item2.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("");
-            alert.setHeaderText("Deseja realmente excluir o tutor?");
-            alert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                    TutorEntity tutorEntity = table.getSelectionModel().getSelectedItem();
-                    if (TutorDAO.getInstance().delete(tutorEntity)) {
-                        table.getItems().remove(tutorEntity);
-                        Util.showSuccess("Tutor excluído com sucesso!");
-                        Log.debug("Tutor excluído com sucesso!");
-                    } else {
-                        Util.showError("Erro ao excluir tutor!");
-                        Log.error("Erro ao excluir tutor!");
-                    }
-                }
-            });
-        });
+        item2.setOnAction(e -> excliurTutor());
 
         contextMenu.getItems().addAll(item, item2);
+    }
+
+    private void editarTutor() {
+        TutorEntity tutorEntity = table.getSelectionModel().getSelectedItem();
+        if (tutorEntity == null) {
+            Util.showError("Selecione um tutor para editar!");
+            return;
+        }
+
+        Util.openView("EditarTutor", "Editando tutor " + tutorEntity.getNome(),  (stage, loader) -> {
+            EditarTutorController controller = (EditarTutorController) loader.getController();
+            controller.initialize(tutorEntity);
+
+            stage.setOnHidden(event -> {
+                table.getItems().clear();
+                model.tutores = TutorDAO.getInstance().findAll();
+                table.getItems().addAll(model.tutores);
+            });
+        });
+    }
+
+    private void excliurTutor() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("");
+        alert.setHeaderText("Deseja realmente excluir o tutor?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                TutorEntity tutorEntity = table.getSelectionModel().getSelectedItem();
+                if (tutorEntity == null) {
+                    Util.showError("Selecione um tutor para excluir!");
+                    return;
+                }
+
+                if (TutorDAO.getInstance().delete(tutorEntity)) {
+                    table.getItems().remove(tutorEntity);
+                    Util.showSuccess("Tutor excluído com sucesso!");
+                    Log.debug("Tutor excluído com sucesso!");
+                } else {
+                    Util.showError("Erro ao excluir tutor!");
+                    Log.error("Erro ao excluir tutor!");
+                }
+            }
+        });
     }
 
 }

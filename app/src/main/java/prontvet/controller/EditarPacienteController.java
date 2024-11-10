@@ -54,7 +54,7 @@ public class EditarPacienteController {
 
     @FXML
     void editar(ActionEvent event) {
-        if (validateModel()) {
+        if (model.validate()) {
             if (PacienteDAO.getInstance().update(model.pacienteEntity)) {
                 Util.showSuccess("Paciente editado com sucesso!");
                 Log.debug("Paciente editado com sucesso!");
@@ -64,38 +64,6 @@ public class EditarPacienteController {
                 Log.error("Erro ao editar paciente!");
             }
         }
-    }
-
-    private boolean validateModel() {
-        if (model.pacienteEntity.getTutor() == null) {
-            Util.showError("O tutor precisa ser selecionado!");
-            return false;
-        }
-        if (model.pacienteEntity.getNome() == null || model.pacienteEntity.getNome().isEmpty()) {
-            Util.showError("O nome precisa ser preenchido!");
-            return false;
-        }
-        if (model.pacienteEntity.getRaca() == null || model.pacienteEntity.getRaca().isEmpty()) {
-            Util.showError("A raça precisa ser preenchida!");
-            return false;
-        }
-        if (model.pacienteEntity.getSexo() == null) {
-            Util.showError("O sexo precisa ser selecionado!");
-            return false;
-        }
-        if (model.pacienteEntity.getIdade() <= 0) {
-            Util.showError("A idade precisa ser preenchida!");
-            return false;
-        }
-        if (model.pacienteEntity.getPeso() <= 0d) {
-            Util.showError("O peso precisa ser preenchido!");
-            return false;
-        }
-        if (model.pacienteEntity.getDescricao() == null || model.pacienteEntity.getDescricao().isEmpty()) {
-            Util.showError("A descrição precisa ser preenchida!");
-            return false;
-        }
-        return true;
     }
 
     @FXML
@@ -119,6 +87,10 @@ public class EditarPacienteController {
             boxTutor.getItems().addAll(tutorEntities);
         }
 
+        addBindings();
+    }
+
+    private void addBindings() {
         boxTutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             model.pacienteEntity.setTutor(newValue);
         });

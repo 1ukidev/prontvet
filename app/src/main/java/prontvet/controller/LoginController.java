@@ -35,7 +35,7 @@ public class LoginController {
 
     @FXML
     void login(ActionEvent event) {
-        if (!validateModel()) {
+        if (!model.validate()) {
             return;
         }
 
@@ -53,18 +53,6 @@ public class LoginController {
         }
     }
 
-    private boolean validateModel() {
-        if (model.usuarioEntity.getEmail() == null || model.usuarioEntity.getEmail().isEmpty()) {
-            Util.showError("O e-mail precisa ser preenchido!");
-            return false;
-        }
-        if (model.usuarioEntity.getSenha() == null || model.usuarioEntity.getSenha().isEmpty()) {
-            Util.showError("A senha precisa ser preenchida!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     void abrirCadastro(ActionEvent event) {
         Util.openView("Cadastro", "Cadastro");
@@ -75,6 +63,10 @@ public class LoginController {
         // Verificar se o banco de dados está funcionando.
         OthersDAO.test();
 
+        addBindings();
+    }
+
+    private void addBindings() {
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
             model.usuarioEntity.setEmail(newValue);
         });
