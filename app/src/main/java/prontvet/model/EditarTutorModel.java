@@ -1,8 +1,7 @@
 package prontvet.model;
 
+import prontvet.table.TutorEntity;
+
 public class EditarTutorModel {
-    public Integer id;
-    public String nome;
-    public String telefone;
-    public String endereco;
+    public TutorEntity tutorEntity;
 }

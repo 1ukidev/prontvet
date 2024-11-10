@@ -13,7 +13,6 @@ import prontvet.Util;
 import prontvet.dao.OthersDAO;
 import prontvet.dao.UsuarioDAO;
 import prontvet.model.LoginModel;
-import prontvet.table.UsuarioEntity;
 
 public class LoginController {
 
@@ -40,10 +39,8 @@ public class LoginController {
             return;
         }
 
-        UsuarioEntity usuario = new UsuarioEntity(model.email, model.senha);
-
-        if (UsuarioDAO.getInstance().find(usuario)) {
-            Util.openView("Main", "ProntVet", stage -> {
+        if (UsuarioDAO.getInstance().find(model.usuarioEntity)) {
+            Util.openView("Main", "ProntVet", (stage, loader) -> {
                 // Garantir que o programa será encerrado ao fechar a janela.
                 stage.setOnCloseRequest(e -> {
                     Platform.exit();
@@ -57,11 +54,11 @@ public class LoginController {
     }
 
     private boolean validateModel() {
-        if (model.email == null || model.email.isEmpty()) {
+        if (model.usuarioEntity.getEmail() == null || model.usuarioEntity.getEmail().isEmpty()) {
             Util.showError("O e-mail precisa ser preenchido!");
             return false;
         }
-        if (model.senha == null || model.senha.isEmpty()) {
+        if (model.usuarioEntity.getSenha() == null || model.usuarioEntity.getSenha().isEmpty()) {
             Util.showError("A senha precisa ser preenchida!");
             return false;
         }
@@ -79,10 +76,10 @@ public class LoginController {
         OthersDAO.test();
 
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.email = newValue;
+            model.usuarioEntity.setEmail(newValue);
         });
         txtSenha.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.senha = newValue;
+            model.usuarioEntity.setSenha(newValue);
         });
     }
 

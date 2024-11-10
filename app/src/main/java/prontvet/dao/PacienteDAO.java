@@ -54,14 +54,14 @@ public class PacienteDAO implements DAO<PacienteEntity> {
 
             while (rs.next()) {
                 PacienteEntity paciente = new PacienteEntity();
-                paciente.setId(rs.getInt("id"));
-                paciente.setTutor(TutorDAO.getInstance().findById(rs.getInt("tutor")));
-                paciente.setNome(rs.getString("nome"));
-                paciente.setRaca(rs.getString("raca"));
-                paciente.setSexo(rs.getString("sexo").charAt(0));
-                paciente.setIdade(rs.getInt("idade"));
-                paciente.setPeso(rs.getDouble("peso"));
-                paciente.setDescricao(rs.getString("descricao"));
+                paciente.setId(rs.getInt("id"))
+                        .setTutor(TutorDAO.getInstance().findById(rs.getInt("tutor")))
+                        .setNome(rs.getString("nome"))
+                        .setRaca(rs.getString("raca"))
+                        .setSexo(rs.getString("sexo").charAt(0))
+                        .setIdade(rs.getInt("idade"))
+                        .setPeso(rs.getDouble("peso"))
+                        .setDescricao(rs.getString("descricao"));
                 pacientes.add(paciente);
             }
 

@@ -12,7 +12,7 @@ public class App extends Application {
         Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
         // Abre a tela de login.
-        Util.openView("Login", "ProntVet", primaryStage, stage -> {
+        Util.openView("Login", "ProntVet", primaryStage, (stage, loader) -> {
             // Garantir que o programa será encerrado ao fechar a janela.
             stage.setOnCloseRequest(e -> {
                 Platform.exit();

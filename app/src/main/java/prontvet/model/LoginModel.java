@@ -1,6 +1,7 @@
 package prontvet.model;
 
+import prontvet.table.UsuarioEntity;
+
 public class LoginModel {
-    public String email;
-    public String senha;
+    public UsuarioEntity usuarioEntity = new UsuarioEntity();
 }

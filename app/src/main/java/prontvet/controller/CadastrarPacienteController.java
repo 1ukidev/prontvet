@@ -15,7 +15,6 @@ import prontvet.Util;
 import prontvet.dao.PacienteDAO;
 import prontvet.dao.TutorDAO;
 import prontvet.model.CadastrarPacienteModel;
-import prontvet.table.PacienteEntity;
 import prontvet.table.TutorEntity;
 
 public class CadastrarPacienteController {
@@ -55,13 +54,9 @@ public class CadastrarPacienteController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            PacienteEntity pacienteEntity = new PacienteEntity(
-                model.tutor, model.nome, model.raca, model.sexo,
-                model.idade, model.peso, model.descricao
-            );
-            PacienteDAO.getInstance().save(pacienteEntity);
+            PacienteDAO.getInstance().save(model.pacienteEntity);
 
-            if (pacienteEntity.getId() != null) {
+            if (model.pacienteEntity.getId() != null) {
                 Util.showSuccess("Paciente cadastrado com sucesso!");
                 Log.debug("Paciente cadastrado com sucesso!");
                 ((Stage) borderPane.getScene().getWindow()).close();
@@ -73,31 +68,31 @@ public class CadastrarPacienteController {
     }
 
     private boolean validateModel() {
-        if (model.tutor == null) {
+        if (model.pacienteEntity.getTutor() == null) {
             Util.showError("O tutor precisa ser selecionado!");
             return false;
         }
-        if (model.nome == null || model.nome.isEmpty()) {
+        if (model.pacienteEntity.getNome() == null || model.pacienteEntity.getNome().isEmpty()) {
             Util.showError("O nome precisa ser preenchido!");
             return false;
         }
-        if (model.raca == null || model.raca.isEmpty()) {
+        if (model.pacienteEntity.getRaca() == null || model.pacienteEntity.getRaca().isEmpty()) {
             Util.showError("A raça precisa ser preenchida!");
             return false;
         }
-        if (model.sexo == null || model.sexo.equals(' ')) {
+        if (model.pacienteEntity.getSexo() == null) {
             Util.showError("O sexo precisa ser selecionado!");
             return false;
         }
-        if (model.idade == null || model.idade <= 0) {
+        if (model.pacienteEntity.getIdade() <= 0) {
             Util.showError("A idade precisa ser preenchida!");
             return false;
         }
-        if (model.peso == null || model.peso <= 0) {
+        if (model.pacienteEntity.getPeso() <= 0d) {
             Util.showError("O peso precisa ser preenchido!");
             return false;
         }
-        if (model.descricao == null || model.descricao.isEmpty()) {
+        if (model.pacienteEntity.getDescricao() == null || model.pacienteEntity.getDescricao().isEmpty()) {
             Util.showError("A descrição precisa ser preenchida!");
             return false;
         }
@@ -106,8 +101,6 @@ public class CadastrarPacienteController {
 
     @FXML
     void initialize() {
-        txtNome.setText(model.nome);
-
         boxSexo.getItems().add("Macho");
         boxSexo.getItems().add("Fêmea");
 
@@ -117,34 +110,34 @@ public class CadastrarPacienteController {
         }
 
         boxTutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            model.tutor = newValue;
+            model.pacienteEntity.setTutor(newValue);
         });
         txtNome.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.nome = newValue;
+            model.pacienteEntity.setNome(newValue);
         });
         txtRaca.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.raca = newValue;
+            model.pacienteEntity.setRaca(newValue);
         });
         boxSexo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            model.sexo = (newValue.equals("Macho")) ? 'M' : 'F';
+            model.pacienteEntity.setSexo(newValue.equals("Macho") ? 'M' : 'F');
         });
 
         txtIdade.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*") && newValue.length() <= 3) {
-                model.idade = newValue.isEmpty() ? 0 : Integer.parseInt(newValue);
+                model.pacienteEntity.setIdade(newValue.isEmpty() ? 0 : Integer.parseInt(newValue));
             } else {
                 txtIdade.setText(oldValue);
             }
         });
         txtPeso.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*(\\.\\d*)?") && newValue.length() <= 6) {
-                model.peso = newValue.isEmpty() || newValue.equals(".") ? 0d : Double.parseDouble(newValue);
+                model.pacienteEntity.setPeso(newValue.isEmpty() || newValue.equals(".") ? 0d : Double.parseDouble(newValue));
             } else {
                 txtPeso.setText(oldValue);
             }
         });
         txtDescricao.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.descricao = newValue;
+            model.pacienteEntity.setDescricao(newValue);
         });
     }
 

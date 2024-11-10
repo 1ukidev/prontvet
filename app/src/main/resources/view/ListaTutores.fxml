@@ -11,10 +11,10 @@
          <children>
             <TableView fx:id="table" prefHeight="428.0" prefWidth="668.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="id" prefWidth="100.0" text="Id" />
+                <TableColumn fx:id="id" prefWidth="65.0" text="Id" />
                 <TableColumn fx:id="nome" prefWidth="100.0" text="Nome" />
                   <TableColumn fx:id="telefone" prefWidth="100.0" text="Telefone" />
-                  <TableColumn fx:id="endereco" prefWidth="100.0" text="Endereço" />
+                  <TableColumn fx:id="endereco" prefWidth="160.0" text="Endereço" />
               </columns>
             </TableView>
          </children>

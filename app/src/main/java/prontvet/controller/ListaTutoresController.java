@@ -69,7 +69,17 @@ public class ListaTutoresController {
     private void criarMenuContexto() {
         MenuItem item = new MenuItem("Editar");
         item.setOnAction(e -> {
-            Util.openView("EditarTutor", "Editando tutor " + table.getSelectionModel().getSelectedItem().getNome());
+            TutorEntity tutorEntity = table.getSelectionModel().getSelectedItem();
+            Util.openView("EditarTutor", "Editando tutor " + tutorEntity.getNome(),  (stage, loader) -> {
+                EditarTutorController controller = (EditarTutorController) loader.getController();
+                controller.initialize(tutorEntity);
+
+                stage.setOnHidden(event -> {
+                    table.getItems().clear();
+                    model.tutores = TutorDAO.getInstance().findAll();
+                    table.getItems().addAll(model.tutores);
+                });
+            });
         });
 
         MenuItem item2 = new MenuItem("Excluir");

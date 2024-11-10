@@ -29,7 +29,7 @@ public class Util {
             currentStage.setResizable(false);
 
             if (extraConfig != null) {
-                extraConfig.run(currentStage);
+                extraConfig.run(currentStage, loader);
             }
 
             currentStage.centerOnScreen();

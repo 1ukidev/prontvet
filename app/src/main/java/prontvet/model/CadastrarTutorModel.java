@@ -1,7 +1,7 @@
 package prontvet.model;
 
+import prontvet.table.TutorEntity;
+
 public class CadastrarTutorModel {
-    public String nome;
-    public String telefone;
-    public String endereco;
+    public TutorEntity tutorEntity = new TutorEntity();
 }

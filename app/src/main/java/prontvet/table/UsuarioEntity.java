@@ -16,24 +16,27 @@ public class UsuarioEntity {
         return id;
     }
 
-    public void setId(Integer id) {
+    public UsuarioEntity setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UsuarioEntity setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public UsuarioEntity setSenha(String senha) {
         this.senha = senha;
+        return this;
     }
 
     @Override

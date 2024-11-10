@@ -50,10 +50,10 @@ public class TutorDAO implements DAO<TutorEntity> {
 
             while (rs.next()) {
                 TutorEntity tutor = new TutorEntity();
-                tutor.setId(rs.getInt("id"));
-                tutor.setNome(rs.getString("nome"));
-                tutor.setTelefone(rs.getString("telefone"));
-                tutor.setEndereco(rs.getString("endereco"));
+                tutor.setId(rs.getInt("id"))
+                     .setNome(rs.getString("nome"))
+                     .setTelefone(rs.getString("telefone"))
+                     .setEndereco(rs.getString("endereco"));
                 tutores.add(tutor);
             }
 
@@ -130,10 +130,10 @@ public class TutorDAO implements DAO<TutorEntity> {
 
             if (rs.next()) {
                 TutorEntity tutor = new TutorEntity();
-                tutor.setId(rs.getInt("id"));
-                tutor.setNome(rs.getString("nome"));
-                tutor.setTelefone(rs.getString("telefone"));
-                tutor.setEndereco(rs.getString("endereco"));
+                tutor.setId(rs.getInt("id"))
+                     .setNome(rs.getString("nome"))
+                     .setTelefone(rs.getString("telefone"))
+                     .setEndereco(rs.getString("endereco"));
                 return tutor;
             }
 

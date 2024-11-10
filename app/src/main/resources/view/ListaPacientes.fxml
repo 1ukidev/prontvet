@@ -5,18 +5,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.ListaPacientesController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prontvet.controller.ListaPacientesController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="table" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="id" prefWidth="100.0" text="Id" />
+                <TableColumn fx:id="id" prefWidth="65.0" text="Id" />
+                  <TableColumn fx:id="tutor" prefWidth="135.0" text="Tutor" />
                 <TableColumn fx:id="nome" prefWidth="100.0" text="Nome" />
                   <TableColumn fx:id="raca" prefWidth="100.0" text="Raça" />
                   <TableColumn fx:id="sexo" prefWidth="100.0" text="Sexo" />
                   <TableColumn fx:id="idade" prefWidth="100.0" text="Idade" />
                   <TableColumn fx:id="peso" prefWidth="100.0" text="Peso" />
+                  <TableColumn fx:id="descricao" prefWidth="160.0" text="Descrição" />
               </columns>
             </TableView>
          </children>

@@ -49,9 +49,9 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
 
             while (rs.next()) {
                 UsuarioEntity usuario = new UsuarioEntity();
-                usuario.setId(rs.getInt("id"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));
+                usuario.setId(rs.getInt("id"))
+                       .setEmail(rs.getString("email"))
+                       .setSenha(rs.getString("senha"));
                 usuarios.add(usuario);
             }
 

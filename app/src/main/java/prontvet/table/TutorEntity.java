@@ -18,32 +18,36 @@ public class TutorEntity {
         return id;
     }
 
-    public void setId(Integer id) {
+    public TutorEntity setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public TutorEntity setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public TutorEntity setTelefone(String telefone) {
         this.telefone = telefone;
+        return this;
     }
 
     public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public TutorEntity setEndereco(String endereco) {
         this.endereco = endereco;
+        return this;
     }
 
     @Override

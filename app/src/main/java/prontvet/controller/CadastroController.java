@@ -11,7 +11,6 @@ import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.UsuarioDAO;
 import prontvet.model.CadastroModel;
-import prontvet.table.UsuarioEntity;
 
 public class CadastroController {
 
@@ -35,10 +34,9 @@ public class CadastroController {
     @FXML
     void cadastrar(ActionEvent event) {
         if (validateModel()) {
-            UsuarioEntity usuario = new UsuarioEntity(model.email, model.senha);
-            UsuarioDAO.getInstance().save(usuario);
+            UsuarioDAO.getInstance().save(model.usuarioEntity);
 
-            if (usuario.getId() != null) {
+            if (model.usuarioEntity.getId() != null) {
                 Util.showSuccess("Usuário cadastrado com sucesso!");
                 Log.debug("Usuário cadastrado com sucesso!");
                 ((Stage) borderPane.getScene().getWindow()).close();
@@ -50,11 +48,11 @@ public class CadastroController {
     }
 
     private boolean validateModel() {
-        if (model.email == null || model.email.isEmpty()) {
+        if (model.usuarioEntity.getEmail() == null || model.usuarioEntity.getEmail().isEmpty()) {
             Util.showError("O e-mail precisa ser preenchido!");
             return false;
         }
-        if (model.senha == null || model.senha.isEmpty()) {
+        if (model.usuarioEntity.getSenha() == null || model.usuarioEntity.getSenha().isEmpty()) {
             Util.showError("A senha precisa ser preenchida!");
             return false;
         }
@@ -62,7 +60,7 @@ public class CadastroController {
             Util.showError("A senha precisa ser repetida!");
             return false;
         }
-        if (!model.senha.equals(model.repitaSenha)) {
+        if (!model.usuarioEntity.getSenha().equals(model.repitaSenha)) {
             Util.showError("As senhas não conferem!");
             return false;
         }
@@ -72,10 +70,10 @@ public class CadastroController {
     @FXML
     void initialize() {
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.email = newValue;
+            model.usuarioEntity.setEmail(newValue);
         });
         txtSenha.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.senha = newValue;
+            model.usuarioEntity.setSenha(newValue);
         });
         txtRepitaSenha.textProperty().addListener((observable, oldValue, newValue) -> {
             model.repitaSenha = newValue;

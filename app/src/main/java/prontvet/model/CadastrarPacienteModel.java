@@ -1,13 +1,7 @@
 package prontvet.model;
 
-import prontvet.table.TutorEntity;
+import prontvet.table.PacienteEntity;
 
 public class CadastrarPacienteModel {
-    public TutorEntity tutor;
-    public String nome;
-    public String raca;
-    public Character sexo;
-    public Integer idade;
-    public Double peso;
-    public String descricao;
+    public PacienteEntity pacienteEntity = new PacienteEntity();
 }

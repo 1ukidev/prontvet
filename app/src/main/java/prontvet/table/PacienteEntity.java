@@ -27,64 +27,72 @@ public class PacienteEntity {
         return id;
     }
 
-    public void setId(Integer id) {
+    public PacienteEntity setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public TutorEntity getTutor() {
         return tutor;
     }
 
-    public void setTutor(TutorEntity tutor) {
+    public PacienteEntity setTutor(TutorEntity tutor) {
         this.tutor = tutor;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public PacienteEntity setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getRaca() {
         return raca;
     }
 
-    public void setRaca(String raca) {
+    public PacienteEntity setRaca(String raca) {
         this.raca = raca;
+        return this;
     }
 
     public Character getSexo() {
         return sexo;
     }
 
-    public void setSexo(Character sexo) {
+    public PacienteEntity setSexo(Character sexo) {
         this.sexo = sexo;
+        return this;
     }
 
     public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(Integer idade) {
+    public PacienteEntity setIdade(Integer idade) {
         this.idade = idade;
+        return this;
     }
 
     public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(Double peso) {
+    public PacienteEntity setPeso(Double peso) {
         this.peso = peso;
+        return this;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public PacienteEntity setDescricao(String descricao) {
         this.descricao = descricao;
+        return this;
     }
 
     @Override

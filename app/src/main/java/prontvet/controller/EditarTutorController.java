@@ -34,12 +34,7 @@ public class EditarTutorController {
     @FXML
     void editar(ActionEvent event) {
         if (validateModel()) {
-            TutorEntity tutorEntity = new TutorEntity(
-                model.nome, model.telefone, model.endereco
-            );
-            tutorEntity.setId(model.id);
-
-            if (TutorDAO.getInstance().update(tutorEntity)) {
+            if (TutorDAO.getInstance().update(model.tutorEntity)) {
                 Util.showSuccess("Tutor editado com sucesso!");
                 Log.debug("Tutor editado com sucesso!");
                 ((Stage) borderPane.getScene().getWindow()).close();
@@ -51,15 +46,19 @@ public class EditarTutorController {
     }
 
     private boolean validateModel() {
-        if (model.nome == null || model.nome.isEmpty()) {
+        if (model.tutorEntity == null) {
+            Util.showError("Erro ao editar tutor!");
+            return false;
+        }
+        if (model.tutorEntity.getNome() == null || model.tutorEntity.getNome().isEmpty()) {
             Util.showError("O nome precisa ser preenchido!");
             return false;
         }
-        if (model.telefone == null || model.telefone.isEmpty()) {
+        if (model.tutorEntity.getTelefone() == null || model.tutorEntity.getTelefone().isEmpty()) {
             Util.showError("O telefone precisa ser preenchido!");
             return false;
         }
-        if (model.endereco == null || model.endereco.isEmpty()) {
+        if (model.tutorEntity.getEndereco() == null || model.tutorEntity.getEndereco().isEmpty()) {
             Util.showError("O endereço precisa ser preenchido!");
             return false;
         }
@@ -67,19 +66,26 @@ public class EditarTutorController {
     }
 
     @FXML
-    void initialize() {
+    void initialize(TutorEntity tutorEntity) {
+        if (tutorEntity != null) {
+            model.tutorEntity = tutorEntity;
+            txtNome.setText(tutorEntity.getNome());
+            txtTelefone.setText(tutorEntity.getTelefone());
+            txtEndereco.setText(tutorEntity.getEndereco());
+        }
+
         txtNome.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.nome = newValue;
+            model.tutorEntity.setNome(newValue);
         });
         txtTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*") && newValue.length() <= 11) {
-                model.telefone = newValue.isEmpty() ? "" : newValue;
+                model.tutorEntity.setTelefone(newValue.isEmpty() ? "" : newValue);
             } else {
                 txtTelefone.setText(oldValue);
             }
         });
         txtEndereco.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.endereco = newValue;
+            model.tutorEntity.setEndereco(newValue);
         });
     }
 

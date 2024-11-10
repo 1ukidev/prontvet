@@ -15,6 +15,7 @@ import prontvet.Util;
 import prontvet.dao.PacienteDAO;
 import prontvet.model.ListaPacientesModel;
 import prontvet.table.PacienteEntity;
+import prontvet.table.TutorEntity;
 
 public class ListaPacientesController {
 
@@ -26,6 +27,9 @@ public class ListaPacientesController {
 
     @FXML
     private TableColumn<PacienteEntity, Integer> id;
+
+    @FXML
+    private TableColumn<PacienteEntity, TutorEntity> tutor;
 
     @FXML
     private TableColumn<PacienteEntity, Integer> idade;
@@ -42,6 +46,9 @@ public class ListaPacientesController {
     @FXML
     private TableColumn<PacienteEntity, Character> sexo;
 
+    @FXML
+    private TableColumn<PacienteEntity, String> descricao;
+
     private ContextMenu contextMenu = new ContextMenu();
 
     private ListaPacientesModel model = new ListaPacientesModel();
@@ -49,11 +56,13 @@ public class ListaPacientesController {
     @FXML
     void initialize() {
         id.setCellValueFactory(new PropertyValueFactory<PacienteEntity, Integer>("id"));
+        tutor.setCellValueFactory(new PropertyValueFactory<PacienteEntity, TutorEntity>("tutor"));
         idade.setCellValueFactory(new PropertyValueFactory<PacienteEntity, Integer>("idade"));
         nome.setCellValueFactory(new PropertyValueFactory<PacienteEntity, String>("nome"));
         peso.setCellValueFactory(new PropertyValueFactory<PacienteEntity, Double>("peso"));
         raca.setCellValueFactory(new PropertyValueFactory<PacienteEntity, String>("raca"));
         sexo.setCellValueFactory(new PropertyValueFactory<PacienteEntity, Character>("sexo"));
+        descricao.setCellValueFactory(new PropertyValueFactory<PacienteEntity, String>("descricao"));
 
         criarMenuContexto();
         table.setOnMouseClicked(e -> {
@@ -77,7 +86,17 @@ public class ListaPacientesController {
     private void criarMenuContexto() {
         MenuItem item = new MenuItem("Editar");
         item.setOnAction(e -> {
-            Util.openView("EditarPaciente", "Editando paciente " + table.getSelectionModel().getSelectedItem().getNome());
+            PacienteEntity pacienteEntity = table.getSelectionModel().getSelectedItem();
+            Util.openView("EditarPaciente", "Editando paciente " + pacienteEntity.getNome(), (stage, loader) -> {
+                EditarPacienteController controller = (EditarPacienteController) loader.getController();
+                controller.initialize(pacienteEntity);
+
+                stage.setOnHidden(event -> {
+                    table.getItems().clear();
+                    model.pacientes = PacienteDAO.getInstance().findAll();
+                    table.getItems().addAll(model.pacientes);
+                });
+            });
         });
 
         MenuItem item2 = new MenuItem("Excluir");
