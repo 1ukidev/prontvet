@@ -6,14 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Util {
     public static void openView(String view, String title, Stage stage, Config extraConfig) {
         try {
-            Parent root = FXMLLoader.load(Util.class.getResource("/view/" + view + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(Util.class.getResource("/view/" + view + ".fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root);
 
             Stage currentStage = null;
@@ -52,14 +52,14 @@ public class Util {
     }
 
     public static void showError(String message) {
-        Alert alert = new Alert(AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("");
         alert.setHeaderText(message);
         alert.show();
     }
 
     public static void showSuccess(String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("");
         alert.setHeaderText(message);
         alert.show();

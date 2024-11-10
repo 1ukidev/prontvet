@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import prontvet.Util;
 import prontvet.dao.OthersDAO;
 import prontvet.dao.UsuarioDAO;
+import prontvet.model.LoginModel;
 import prontvet.table.UsuarioEntity;
 
 public class LoginController {
@@ -23,7 +24,7 @@ public class LoginController {
     private Button btnLogin;
 
     @FXML
-    private TextField txtNome;
+    private TextField txtEmail;
 
     @FXML
     private PasswordField txtSenha;
@@ -31,9 +32,16 @@ public class LoginController {
     @FXML
     private Hyperlink linkSeCadastrar;
 
+    private LoginModel model = new LoginModel();
+
     @FXML
     void login(ActionEvent event) {
-        UsuarioEntity usuario = new UsuarioEntity(txtNome.getText(), txtSenha.getText());
+        if (!validateModel()) {
+            return;
+        }
+
+        UsuarioEntity usuario = new UsuarioEntity(model.email, model.senha);
+
         if (UsuarioDAO.getInstance().find(usuario)) {
             Util.openView("Main", "ProntVet", stage -> {
                 // Garantir que o programa será encerrado ao fechar a janela.
@@ -48,6 +56,18 @@ public class LoginController {
         }
     }
 
+    private boolean validateModel() {
+        if (model.email == null || model.email.isEmpty()) {
+            Util.showError("O e-mail precisa ser preenchido!");
+            return false;
+        }
+        if (model.senha == null || model.senha.isEmpty()) {
+            Util.showError("A senha precisa ser preenchida!");
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     void abrirCadastro(ActionEvent event) {
         Util.openView("Cadastro", "Cadastro");
@@ -57,6 +77,13 @@ public class LoginController {
     void initialize() {
         // Verificar se o banco de dados está funcionando.
         OthersDAO.test();
+
+        txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
+            model.email = newValue;
+        });
+        txtSenha.textProperty().addListener((observable, oldValue, newValue) -> {
+            model.senha = newValue;
+        });
     }
 
 }

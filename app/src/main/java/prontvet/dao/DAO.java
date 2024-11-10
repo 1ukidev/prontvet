@@ -22,12 +22,12 @@ public interface DAO<T> {
      * 
      * @param t
      */
-    void update(T t);
+    boolean update(T t);
 
     /**
      * Deleta um objeto no banco de dados.
      * 
      * @param t
      */
-    void delete(T t);
+    boolean delete(T t);
 }

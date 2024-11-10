@@ -66,7 +66,7 @@ public class TutorDAO implements DAO<TutorEntity> {
         return tutores;
     }
 
-    public void update(TutorEntity tutor) {
+    public boolean update(TutorEntity tutor) {
         try {
             Connection conn = ConnectionDAO.create();
 
@@ -80,14 +80,21 @@ public class TutorDAO implements DAO<TutorEntity> {
             pstmt.setInt(++i, tutor.getId());
             pstmt.executeUpdate();
 
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
+
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
-    public void delete(TutorEntity tutor) {
+    public boolean delete(TutorEntity tutor) {
         try {
             Connection conn = ConnectionDAO.create();
 
@@ -97,11 +104,46 @@ public class TutorDAO implements DAO<TutorEntity> {
             pstmt.setInt(1, tutor.getId());
             pstmt.executeUpdate();
 
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+
+    public TutorEntity findById(Integer id) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "SELECT * FROM tutores WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                TutorEntity tutor = new TutorEntity();
+                tutor.setId(rs.getInt("id"));
+                tutor.setNome(rs.getString("nome"));
+                tutor.setTelefone(rs.getString("telefone"));
+                tutor.setEndereco(rs.getString("endereco"));
+                return tutor;
+            }
+
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     // Singleton

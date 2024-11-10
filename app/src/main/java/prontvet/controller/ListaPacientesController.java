@@ -1,6 +1,8 @@
 package prontvet.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -9,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import prontvet.Log;
+import prontvet.Util;
 import prontvet.dao.PacienteDAO;
 import prontvet.model.ListaPacientesModel;
 import prontvet.table.PacienteEntity;
@@ -54,18 +57,19 @@ public class ListaPacientesController {
 
         criarMenuContexto();
         table.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.SECONDARY) {
-                contextMenu.show(table, e.getScreenX(), e.getScreenY());
-            } else {
-                contextMenu.hide();
+            if (table.getSelectionModel().getSelectedItem() != null) {
+                if (e.getButton() == MouseButton.SECONDARY) {
+                    contextMenu.show(table, e.getScreenX(), e.getScreenY());
+                } else {
+                    contextMenu.hide();
+                }
             }
         });
 
-        Log.debug("Buscando pacientes no banco de dados...");
         model.pacientes = PacienteDAO.getInstance().findAll();
 
+        Log.debug("Pacientes encontrados: " + model.pacientes.size());
         if (!model.pacientes.isEmpty()) {
-            Log.debug("Pacientes encontrados: " + model.pacientes.size());
             table.getItems().addAll(model.pacientes);
         }
     }
@@ -73,12 +77,29 @@ public class ListaPacientesController {
     private void criarMenuContexto() {
         MenuItem item = new MenuItem("Editar");
         item.setOnAction(e -> {
-            Log.debug("Clicado");
+            Util.openView("EditarPaciente", "Editando paciente " + table.getSelectionModel().getSelectedItem().getNome());
         });
+
         MenuItem item2 = new MenuItem("Excluir");
         item2.setOnAction(e -> {
-            Log.debug("Clicado");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Deseja realmente excluir o paciente?");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    PacienteEntity pacienteEntity = table.getSelectionModel().getSelectedItem();
+                    if (PacienteDAO.getInstance().delete(pacienteEntity)) {
+                        table.getItems().remove(pacienteEntity);
+                        Util.showSuccess("Paciente excluído com sucesso!");
+                        Log.debug("Paciente excluído com sucesso!");
+                    } else {
+                        Util.showError("Erro ao excluir paciente!");
+                        Log.error("Erro ao excluir paciente!");
+                    }
+                }
+            });
         });
+
         contextMenu.getItems().addAll(item, item2);
     }
 

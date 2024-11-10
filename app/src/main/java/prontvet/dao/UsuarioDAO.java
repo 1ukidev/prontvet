@@ -64,6 +64,57 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
         return usuarios;
     }
 
+    public boolean update(UsuarioEntity usuario) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "UPDATE usuarios SET email = ?, senha = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            int i = 0;
+            pstmt.setString(++i, usuario.getEmail());
+            pstmt.setString(++i, usuario.getSenha());
+            pstmt.setInt(++i, usuario.getId());
+            pstmt.executeUpdate();
+
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean delete(UsuarioEntity usuario) {
+        try {
+            Connection conn = ConnectionDAO.create();
+
+            String sql = "DELETE FROM usuarios WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, usuario.getId());
+            pstmt.executeUpdate();
+
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     public boolean find(UsuarioEntity usuario) {
         try {
             Connection conn = ConnectionDAO.create();
@@ -88,43 +139,6 @@ public class UsuarioDAO implements DAO<UsuarioEntity> {
         }
 
         return false;
-    }
-
-    public void update(UsuarioEntity usuario) {
-        try {
-            Connection conn = ConnectionDAO.create();
-
-            String sql = "UPDATE usuarios SET email = ?, senha = ? WHERE id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            int i = 0;
-            pstmt.setString(++i, usuario.getEmail());
-            pstmt.setString(++i, usuario.getSenha());
-            pstmt.setInt(++i, usuario.getId());
-            pstmt.executeUpdate();
-
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void delete(UsuarioEntity usuario) {
-        try {
-            Connection conn = ConnectionDAO.create();
-
-            String sql = "DELETE FROM usuarios WHERE id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setInt(1, usuario.getId());
-            pstmt.executeUpdate();
-
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     // Singleton

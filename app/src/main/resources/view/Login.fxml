@@ -17,7 +17,7 @@
          <children>
             <Label text="ProntVet" textFill="#dddddd">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="26.0" />
                </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="65.0" prefWidth="528.0">
@@ -30,7 +30,7 @@
                         <Insets right="8.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtNome" />
+                  <TextField fx:id="txtEmail" />
                </children>
                <padding>
                   <Insets top="12.0" />

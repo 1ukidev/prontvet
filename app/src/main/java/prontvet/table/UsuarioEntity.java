@@ -35,4 +35,9 @@ public class UsuarioEntity {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    @Override
+    public String toString() {
+        return email;
+    }
 }

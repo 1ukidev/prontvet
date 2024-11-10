@@ -14,17 +14,17 @@ import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.PacienteDAO;
 import prontvet.dao.TutorDAO;
-import prontvet.model.CadastrarPacienteModel;
+import prontvet.model.EditarPacienteModel;
 import prontvet.table.PacienteEntity;
 import prontvet.table.TutorEntity;
 
-public class CadastrarPacienteController {
+public class EditarPacienteController {
 
     @FXML
     private BorderPane borderPane;
 
     @FXML
-    private Button btnCadastrar;
+    private Button btnEditar;
 
     @FXML
     private MenuButton menuSexo;
@@ -50,24 +50,24 @@ public class CadastrarPacienteController {
     @FXML
     private ChoiceBox<TutorEntity> boxTutor;
 
-    private CadastrarPacienteModel model = new CadastrarPacienteModel();
+    public EditarPacienteModel model = new EditarPacienteModel();
 
     @FXML
-    void cadastrar(ActionEvent event) {
+    void editar(ActionEvent event) {
         if (validateModel()) {
             PacienteEntity pacienteEntity = new PacienteEntity(
-                model.tutor, model.nome, model.raca, model.sexo,
-                model.idade, model.peso, model.descricao
+                model.tutor, model.nome, model.raca,
+                model.sexo, model.idade, model.peso, model.descricao
             );
-            PacienteDAO.getInstance().save(pacienteEntity);
+            pacienteEntity.setId(model.id);
 
-            if (pacienteEntity.getId() != null) {
-                Util.showSuccess("Paciente cadastrado com sucesso!");
-                Log.debug("Paciente cadastrado com sucesso!");
+            if (PacienteDAO.getInstance().update(pacienteEntity)) {
+                Util.showSuccess("Paciente editado com sucesso!");
+                Log.debug("Paciente editado com sucesso!");
                 ((Stage) borderPane.getScene().getWindow()).close();
             } else {
-                Util.showError("Erro ao cadastrar paciente!");
-                Log.error("Erro ao cadastrar paciente!");
+                Util.showError("Erro ao editar paciente!");
+                Log.error("Erro ao editar paciente!");
             }
         }
     }
@@ -106,8 +106,6 @@ public class CadastrarPacienteController {
 
     @FXML
     void initialize() {
-        txtNome.setText(model.nome);
-
         boxSexo.getItems().add("Macho");
         boxSexo.getItems().add("Fêmea");
 

@@ -1,6 +1,6 @@
 package prontvet.model;
 
-public class TutorModel {
+public class CadastrarTutorModel {
     public String nome;
     public String telefone;
     public String endereco;

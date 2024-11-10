@@ -9,16 +9,16 @@ import javafx.stage.Stage;
 import prontvet.Log;
 import prontvet.Util;
 import prontvet.dao.TutorDAO;
-import prontvet.model.CadastrarTutorModel;
+import prontvet.model.EditarTutorModel;
 import prontvet.table.TutorEntity;
 
-public class CadastrarTutorController {
+public class EditarTutorController {
 
     @FXML
     private BorderPane borderPane;
 
     @FXML
-    private Button btnCadastrar;
+    private Button btnEditar;
 
     @FXML
     private TextField txtNome;
@@ -29,23 +29,23 @@ public class CadastrarTutorController {
     @FXML
     private TextField txtEndereco;
 
-    private CadastrarTutorModel model = new CadastrarTutorModel();
+    private EditarTutorModel model = new EditarTutorModel();
 
     @FXML
-    void cadastrar(ActionEvent event) {
+    void editar(ActionEvent event) {
         if (validateModel()) {
             TutorEntity tutorEntity = new TutorEntity(
                 model.nome, model.telefone, model.endereco
             );
-            TutorDAO.getInstance().save(tutorEntity);
+            tutorEntity.setId(model.id);
 
-            if (tutorEntity.getId() != null) {
-                Util.showSuccess("Tutor cadastrado com sucesso!");
-                Log.debug("Tutor cadastrado com sucesso!");
+            if (TutorDAO.getInstance().update(tutorEntity)) {
+                Util.showSuccess("Tutor editado com sucesso!");
+                Log.debug("Tutor editado com sucesso!");
                 ((Stage) borderPane.getScene().getWindow()).close();
             } else {
-                Util.showError("Erro ao cadastrar tutor!");
-                Log.error("Erro ao cadastrar tutor!");
+                Util.showError("Erro ao editado tutor!");
+                Log.error("Erro ao editado tutor!");
             }
         }
     }

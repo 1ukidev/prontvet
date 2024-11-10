@@ -16,7 +16,7 @@
                         <Insets bottom="24.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnListarTutores" mnemonicParsing="false" onAction="#openListarTutores" text="Listar tutores" />
+                  <Button fx:id="btnListarTutores" mnemonicParsing="false" onAction="#openListarTutores" text="Lista de tutores" />
                </children>
             </VBox>
          </children>

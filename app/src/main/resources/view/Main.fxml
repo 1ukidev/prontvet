@@ -29,12 +29,15 @@
             </VBox>
             <HBox prefHeight="84.0" prefWidth="516.0">
                <children>
-                  <Button fx:id="btnPacientes" mnemonicParsing="false" onAction="#openPacientes" text="Pacientes">
+                  <Button fx:id="btnTutores" mnemonicParsing="false" onAction="#openTutores" text="Tutores">
                      <HBox.margin>
                         <Insets right="12.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnPacientes" mnemonicParsing="false" onAction="#openPacientes" text="Pacientes">
+                     <HBox.margin>
+                        <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnTutores" mnemonicParsing="false" onAction="#openTutores" text="Tutores" />
                </children>
             </HBox>
          </children>

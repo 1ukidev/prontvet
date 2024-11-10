@@ -4,11 +4,14 @@ USE `prontvet`;
 
 CREATE TABLE IF NOT EXISTS `pacientes` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`tutor` INT NOT NULL,
 	`nome` VARCHAR(255) NOT NULL,
 	`raca` VARCHAR(255) NOT NULL,
 	`sexo` CHAR NOT NULL,
 	`idade` INT NOT NULL,
-	`peso` DOUBLE NOT NULL
+	`peso` DOUBLE NOT NULL,
+	`descricao` TEXT NOT NULL,
+	FOREIGN KEY (`tutor`) REFERENCES `tutores`(`id`)
 )
 
 CREATE TABLE IF NOT EXISTS `tutores` (

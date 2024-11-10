@@ -2,7 +2,8 @@ package prontvet.model;
 
 import prontvet.table.TutorEntity;
 
-public class CadastrarPacienteModel {
+public class EditarPacienteModel {
+    public Integer id;
     public TutorEntity tutor;
     public String nome;
     public String raca;

@@ -15,15 +15,17 @@ public class PacienteDAO implements DAO<PacienteEntity> {
         try {
             Connection conn = ConnectionDAO.create();
 
-            String sql = "INSERT INTO pacientes (nome, raca, sexo, idade, peso) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO pacientes (tutor, nome, raca, sexo, idade, peso, descricao) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             int i = 0;
+            pstmt.setInt(++i, paciente.getTutor().getId());
             pstmt.setString(++i, paciente.getNome());
             pstmt.setString(++i, paciente.getRaca());
             pstmt.setString(++i, paciente.getSexo().toString());
             pstmt.setInt(++i, paciente.getIdade());
             pstmt.setDouble(++i, paciente.getPeso());
+            pstmt.setString(++i, paciente.getDescricao());
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -53,11 +55,13 @@ public class PacienteDAO implements DAO<PacienteEntity> {
             while (rs.next()) {
                 PacienteEntity paciente = new PacienteEntity();
                 paciente.setId(rs.getInt("id"));
+                paciente.setTutor(TutorDAO.getInstance().findById(rs.getInt("tutor")));
                 paciente.setNome(rs.getString("nome"));
                 paciente.setRaca(rs.getString("raca"));
                 paciente.setSexo(rs.getString("sexo").charAt(0));
                 paciente.setIdade(rs.getInt("idade"));
                 paciente.setPeso(rs.getDouble("peso"));
+                paciente.setDescricao(rs.getString("descricao"));
                 pacientes.add(paciente);
             }
 
@@ -70,30 +74,39 @@ public class PacienteDAO implements DAO<PacienteEntity> {
         return pacientes;
     }
 
-    public void update(PacienteEntity paciente) {
+    public boolean update(PacienteEntity paciente) {
         try {
             Connection conn = ConnectionDAO.create();
 
-            String sql = "UPDATE pacientes SET nome = ?, raca = ?, sexo = ?, idade = ?, peso = ? WHERE id = ?";
+            String sql = "UPDATE pacientes SET tutor = ?, nome = ?, raca = ?, sexo = ?, idade = ?, peso = ?, descricao = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             int i = 0;
+            pstmt.setInt(++i, paciente.getTutor().getId());
             pstmt.setString(++i, paciente.getNome());
             pstmt.setString(++i, paciente.getRaca());
             pstmt.setString(++i, paciente.getSexo().toString());
             pstmt.setInt(++i, paciente.getIdade());
             pstmt.setDouble(++i, paciente.getPeso());
+            pstmt.setString(++i, paciente.getDescricao());
             pstmt.setInt(++i, paciente.getId());
             pstmt.executeUpdate();
+
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
 
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
-    public void delete(PacienteEntity paciente) {
+    public boolean delete(PacienteEntity paciente) {
         try {
             Connection conn = ConnectionDAO.create();
 
@@ -103,11 +116,18 @@ public class PacienteDAO implements DAO<PacienteEntity> {
             pstmt.setInt(1, paciente.getId());
             pstmt.executeUpdate();
 
+            if (pstmt.getUpdateCount() == 0) {
+                return false;
+            }
+
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
     // Singleton
