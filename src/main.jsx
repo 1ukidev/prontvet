@@ -7,7 +7,7 @@ import Login from "./Login.jsx";
 
 const rotas = createBrowserRouter([
     { path: '/', element: <Login /> },
-    { path: '/app', element: <App /> }
+    { path: "/app", element: <App /> }
 ]);
 
 createRoot(document.getElementById("root")).render(
