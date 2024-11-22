@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
     --color-white: white;
     --color-BlanchedAlmond: #FFEBCD;
@@ -6,19 +12,30 @@
     --color-orangebutton: #e76b12;
     --color-orangeclick: #a1551e;
     --color-green: #42b72a;
-    --color-green: #42b72a;
+    --cor-padrão: #ffefdb;
+    --cor-padrão-hover: #f3b2e5;
+    --cor-fonte: #faa230;
+    --cor-fonte-p: #555;
+    --cor-btn: #613a2a;
+    --cor-btn-hover: #15ff00;
+    --cor-btn-fonte: #000;
+    --cor-fonte-corpo: #555;
+    --cor-fonte-corpo-leve: #777;
 }
 
-body {
+.login {
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--color-BlanchedAlmond);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85vh;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
 }
 
-.content {
+.login .content {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -26,11 +43,11 @@ body {
     flex-wrap: wrap;
 }
 
-.content-info {
+.login .content-info {
     width: 625px;
 }
 
-.content-login {
+.login .content-login {
     width: 450px;
     display: flex;
     flex-direction: column;
@@ -38,7 +55,7 @@ body {
     gap: 1rem;
 }
 
-.content-login-box {
+.login .content-login-box {
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -46,11 +63,13 @@ body {
     padding: 1rem;
     width: 100%;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, 
+                rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, 
+                rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
     margin-top: 50px;
 }
 
-.inputs {
+.login .inputs {
     padding: 10px;
     height: 15px;
     border-radius: 10px;
@@ -60,65 +79,157 @@ body {
     transition: 0.2s;
 }
 
-.inputs:focus {
+.login .inputs:focus {
     outline: none !important;
     border-color: #719ECE;
     box-shadow: 0 0 10px #719ECE;
 }
 
-.btn {
+.login .btn {
     padding: 8px;
     border: none;
     color: var(--color-white);
     border-radius: 10px;
     width: 100%;
     font-size: 1.1rem;
-    transition: .2s;
+    transition: 0.2s;
 }
 
-a {
+.login a {
     text-decoration: none;
     cursor: pointer;
     color: #6464f3;
 }
 
-a:hover {
+.login a:hover {
     text-decoration: underline;
 }
 
-hr {
+.login hr {
     width: 100%;
     border: 1px solid var(--color-gray);
 }
 
-.btn-enter {
+.login .btn-enter {
     background-color: var(--color-orangebutton);
     cursor: pointer;
 }
 
-.btn-enter:hover {
+.login .btn-enter:hover {
     background-color: var(--color-orangeclick);
 }
 
-.btn-creat-account {
+.login .btn-creat-account {
     background-color: #4c9e3b;
     width: auto;
     cursor: pointer;
 }
 
-.btn-creat-account:hover {
+.login .btn-creat-account:hover {
     background-color: #3b7c2e;
 }
 
-h1 {
+.login h1 {
     color: rgb(194, 166, 40);
     margin-bottom: 12px;
 }
 
-h3 {
+.login h3 {
     color: rgb(255, 255, 255);
 }
 
-p {
+.login p {
     color: rgb(255, 255, 255);
+}
+
+.home body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.home .banner {
+    background-color: var(--cor-padrão);
+}
+
+.home .banner .linha {
+    margin-top: 15px;
+}
+
+.home .logo {
+    margin: 17.5px 10px;
+}
+
+.home .container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 100vh;
+}
+
+.home .navebar {
+    display: flex;
+    align-items: flex-start;
+    padding: 25px;
+}
+
+.home nav {
+    flex: 1;
+    text-align: right;
+}
+
+.home nav ul {
+    display: inline-block;
+    list-style-type: none;
+    font-weight: 500;
+    color: var(--cor-btn);
+}
+
+.home nav ul li {
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.home nav ul li a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--cor-fonte);
+}
+
+.home .banner p {
+    color: var(--cor-fonte);
+}
+
+.home p {
+    color: var(--cor-fonte-p);
+}
+
+.home .linha {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.home .col-2 {
+    flex-basis: 50%;
+    min-width: 200px;
+    display: inline-table;
+}
+
+.home .col-2 img {
+    max-width: 104%;
+}
+
+.home .col-2 {
+    font-weight: 600;
+}
+
+.home .btn {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--cor-fonte);
+    background: var(--cor-btn);
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 15px;
 }
