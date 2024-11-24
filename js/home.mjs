@@ -7,7 +7,6 @@ export const loadHome = () => {
     if (produtos) {
         loadDB().then((data) => {
             if (data && data.produtos) {
-                console.log(data.produtos);
                 const produtosHTML = data.produtos.map((produto) => `
                     <div class="col-4">
                         <img src="${produto.img}">

@@ -1,6 +1,7 @@
 // Cuida do roteamento da aplicação
 
 import { loadHome } from "./home.mjs";
+import { loadLogin } from "./login.mjs";
 
 const root = document.getElementById("root");
 
@@ -35,7 +36,7 @@ export const route = () => {
             getPage("home", loadHome);
             break;
         case "":
-            getPage("login");
+            getPage("login", loadLogin);
             break;
     }
 };
