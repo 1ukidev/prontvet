@@ -1,0 +1,40 @@
+{
+    "produtos": [
+        {
+            "id": 1,
+            "descricao": "Ração Biofresh para Cães Adultos de Pequeno e Mini Porte Sabor Frango",
+            "preco": 69.69,
+            "img": "img/produto_1.jpg"
+        },
+        {
+            "id": 2,
+            "descricao": "Ração Biofresh para Cães Adultos de Raças Médias",
+            "preco": 69.69,
+            "img": "img/produto_2.jpg"
+        },
+        {
+            "id": 3,
+            "descricao": "Creme Dental Petz Carvão Ativado para Cães e Gatos 60g",
+            "preco": 69.69,
+            "img": "img/produto_3.jpg"
+        },
+        {
+            "id": 4,
+            "descricao": "Creme Dental Petz Carvão Ativado para Cães e Gatos 60g",
+            "preco": 69.69,
+            "img": "img/produto_4.jpg"
+        },
+        {
+            "id": 5,
+            "descricao": "Creme Dental Petz Carvão Ativado para Cães e Gatos 60g",
+            "preco": 69.69,
+            "img": "img/produto_5.jpg"
+        },
+        {
+            "id": 6,
+            "descricao": "Creme Dental Petz Carvão Ativado para Cães e Gatos 60g",
+            "preco": 69.69,
+            "img": "img/produto_6.jpg"
+        }
+    ]
+}

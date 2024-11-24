@@ -17,7 +17,7 @@ body {
     --cor-fonte: #faa230;
     --cor-fonte-p: #555;
     --cor-btn: #613a2a;
-    --cor-btn-hover: #15ff00;
+    --cor-btn-hover: #ccac1d;
     --cor-btn-fonte: #000;
     --cor-fonte-corpo: #555;
     --cor-fonte-corpo-leve: #777;
@@ -142,7 +142,7 @@ body {
     color: rgb(255, 255, 255);
 }
 
-.home body {
+.home {
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -163,7 +163,6 @@ body {
     margin: auto;
     padding-left: 25px;
     padding-right: 25px;
-    height: 100vh;
 }
 
 .home .navebar {
@@ -232,4 +231,81 @@ body {
     padding: 8px 10px;
     margin: 10px 0;
     border-radius: 15px;
+    transition: background 0.5s;
+}
+
+.home .btn:hover {
+    background: var(--cor-btn-hover);
+    color: var(--cor-padrão);
+}
+
+.home .categorias {
+    margin: 90px 0;
+}
+
+.home .corpo-categorias {
+    max-width: 1000px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.home .col-3 {
+    flex-basis: 35%;
+    max-width: 310px;
+    margin-bottom: 30px;
+}
+
+.home .col-3 img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.home .col-4 {
+    flex-basis: 25%;
+    max-width: 200px;
+    padding: 10px;
+    margin: 50px;
+    transition: transform 0.5s;
+}
+
+.home .col-4:hover {
+    transform: scale(1.1);
+}
+
+.home .col-4 img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.home .titulo {
+    position: relative;
+    line-height: 60px;
+    text-align: center;
+}
+
+.home h4 {
+    font-weight: normal;
+}
+
+.home .col-4 p {
+    font-size: 14px;
+}
+
+.home .col-4.classificacao {
+    color: var(--cor-fonte);
+}
+
+.home .marcas {
+    margin: 100px auto;
+}
+
+.home .col-5 {
+    width: 160px;
+}
+
+.home .col-5 img {
+    width: 100%;
 }
