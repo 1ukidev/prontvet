@@ -13,7 +13,7 @@ export const loadLogin = () => {
                     const admin = data.usuarios[0];
         
                     if (email === admin.email && password === admin.senha) {
-                        changePage("home");
+                        changePage("");
                     } else {
                         alert("Usuário ou senha inválidos!");
                     }

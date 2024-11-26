@@ -32,11 +32,11 @@ const getPage = async (page, onLoadCallback) => {
 
 export const route = () => {
     switch (location.hash) {
-        case "#home":
-            getPage("home", loadHome);
+        case "#login":
+            getPage("login", loadLogin);
             break;
         case "":
-            getPage("login", loadLogin);
+            getPage("home", loadHome);
             break;
     }
 };
