@@ -11,6 +11,6 @@ export const loadDB = async () => {
 
         return db;
     } catch (error) {
-        console.error("Erro ao carregar o banco de dados:", error);
+        console.error(`Erro ao carregar o banco de dados: ${error.message}`);
     }
 }

@@ -1,9 +1,9 @@
-// Home
+// Produtos
 
 import { loadDB } from "./db.mjs";
 import { showNavbar } from "./navbar.mjs";
 
-export const initHome = () => {
+export const initProdutos = () => {
     showNavbar();
     const produtos = document.getElementById("produtos");
     if (produtos) {
