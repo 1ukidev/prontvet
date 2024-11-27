@@ -387,3 +387,7 @@ td:last-child {
 th:last-child {
     text-align: right;
 }
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
